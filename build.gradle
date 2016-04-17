@@ -1,0 +1,57 @@
+buildscript {
+	ext {
+		springBootVersion = '1.3.3.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+
+
+war {
+	baseName = 'finance'
+	version = '2.0.0-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+configurations {
+}
+
+dependencies {
+	compile(
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework.boot:spring-boot-starter-jdbc',
+
+			'org.dom4j:dom4j:2.0.0',
+	)
+
+//	providedRuntime(
+	compile(
+			'org.springframework.boot:spring-boot-starter-jetty',
+	)
+	runtime(
+			'mysql:mysql-connector-java'
+	)
+
+	testCompile(
+			'org.springframework.boot:spring-boot-starter-test',
+	)
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.12'
+}

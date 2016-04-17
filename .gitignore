@@ -1,0 +1,10 @@
+syntax: glob
+.gradle
+build
+out
+classes
+.idea/workspace.xml
+.idea/gradle.xml
+.idea/libraries/*
+.idea/artifacts/*
+.idea/tasks.xml
