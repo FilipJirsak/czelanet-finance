@@ -19,6 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="czelanet-finance_main" target="1.8" />
+      <module name="czelanet-finance_test" target="1.8" />
       <module name="finance_main" target="1.8" />
       <module name="finance_test" target="1.8" />
     </bytecodeTargetLevel>

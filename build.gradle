@@ -5,23 +5,37 @@ buildscript {
 	repositories {
 		mavenLocal()
 		mavenCentral()
+		maven { url "https://maven.eveoh.nl/content/repositories/releases" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'nl.eveoh:gradle-aspectj:1.6'
 	}
+}
+
+project.ext {
+	aspectjVersion = '1.8.4'
 }
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
-
+apply plugin: 'aspectj'
 
 war {
 	baseName = 'finance'
-	version = '2.0.0-SNAPSHOT'
+	version = '4.0.0-SNAPSHOT'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+compileAspect {
+	additionalAjcArgs = ['encoding': 'UTF-8']
+}
 
 repositories {
 	mavenLocal()
@@ -35,9 +49,21 @@ dependencies {
 	compile(
 			'org.springframework.boot:spring-boot-starter-web',
 			'org.springframework.boot:spring-boot-starter-jdbc',
+			'org.springframework.boot:spring-boot-starter-aop',
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework:spring-aspects',
+			'org.springframework.boot:spring-boot-starter-actuator',
+
+			'org.jodd:jodd-core:3.7',
 
 			'org.dom4j:dom4j:2.0.0',
 	)
+
+/*
+	optional(
+			'org.springframework.boot:spring-boot-configuration-processor'
+	)
+*/
 
 //	providedRuntime(
 	compile(
@@ -49,6 +75,11 @@ dependencies {
 
 	testCompile(
 			'org.springframework.boot:spring-boot-starter-test',
+			'org.testng:testng:6.9.10',
+	)
+
+	aspectpath(
+			'org.springframework:spring-aspects'
 	)
 }
 
