@@ -10,9 +10,10 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -24,14 +25,17 @@ import java.util.regex.Pattern;
 public class RbTextVypisParser implements Closeable {
 
 	private static final Pattern RE_VYPIS_C = Pattern.compile("Bankovni vypis c. (\\d+)");
-	private static final Pattern RE_VYPIS_OBDOBI = Pattern.compile("za (\\d{2}\\.\\d{2}\\.\\d{4})");
+	private static final Pattern RE_VYPIS_DATUM = Pattern.compile("za (\\d{2}\\.\\d{2}\\.\\d{4})");
+	private static final Pattern RE_VYPIS_OBDOBI = Pattern.compile("Za obdobi (\\d{2}\\.\\d{2}\\.\\d{4})/(\\d{2}\\.\\d{2}\\.\\d{4})");
 
 	private static final int LINE_LENGTH = 86;
 	private static final String SINGLE_SEPARATOR = StringUtil.repeat('-', LINE_LENGTH);
 	private static final String DOUBLE_SEPARATOR = StringUtil.repeat('=', LINE_LENGTH);
+	private static final String EMPTY_STRING = "";
 
 	private static final DateTimeFormatter DATUM_VYPISU_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	private static final DateTimeFormatter DATUM_POHYBU_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.");
+	private static final DateTimeFormatter CAS_POHYBU_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
 	private final Logger logger = LoggerFactory.getLogger(RbTextVypisParser.class);
 
@@ -43,7 +47,8 @@ public class RbTextVypisParser implements Closeable {
 
 	private BankovniUcet bankovniUcet = new BankovniUcet();
 	private int cisloVypisu;
-	private LocalDate datumVypisu;
+	private LocalDate obdobiVypisuOd;
+	private LocalDate obdobiVypisuDo;
 	private BigDecimal pocatecniZustatek;
 	private BigDecimal konecnyZustatek;
 	private StringBuilder zpravaBuilder = new StringBuilder();
@@ -90,6 +95,8 @@ public class RbTextVypisParser implements Closeable {
 				case POHYBY:
 					parsePohyby();
 					break;
+				case PATICKA:
+					break;
 			}
 		}
 	}
@@ -105,11 +112,15 @@ public class RbTextVypisParser implements Closeable {
 	private void parseVypis() {
 		if (reader.getLineNumber() == 1) {
 			logger.debug("Banka: {}", line);
-			bankovniUcet.setNazevBanky(line);
+			bankovniUcet.setNazevBanky(line.trim());
 		} else if (matches(RE_VYPIS_C)) {
 			cisloVypisu = Integer.parseInt(matcher.group(1));
+		} else if (matches(RE_VYPIS_DATUM)) {
+			obdobiVypisuOd = LocalDate.parse(matcher.group(1), DATUM_VYPISU_FORMATTER);
+			obdobiVypisuDo = obdobiVypisuOd;
 		} else if (matches(RE_VYPIS_OBDOBI)) {
-			datumVypisu = LocalDate.parse(matcher.group(1), DATUM_VYPISU_FORMATTER);
+			obdobiVypisuOd = LocalDate.parse(matcher.group(1), DATUM_VYPISU_FORMATTER);
+			obdobiVypisuDo = LocalDate.parse(matcher.group(2), DATUM_VYPISU_FORMATTER);
 		} else if (StringUtil.isEmpty(line)) {
 			stav = Stav.UCET;
 		} else {
@@ -125,8 +136,8 @@ public class RbTextVypisParser implements Closeable {
 		if (isEmptyLine()) {
 			return;
 		}
-		String nazev = line.substring(0, 11).trim();
-		String hodnota = line.substring(12);
+		String nazev = substring(0, 11);
+		String hodnota = substring(12);
 		switch (nazev) {
 			case "Nazev uctu:":
 				logger.debug("Název účtu: {}", hodnota);
@@ -150,9 +161,9 @@ public class RbTextVypisParser implements Closeable {
 			stav = Stav.ZPRAVA;
 			return;
 		}
-		String nazev = line.substring(0, 46).trim();
-		String hodnota1 = line.substring(46, 61).trim();
-		String hodnota2 = line.substring(72).trim();
+		String nazev = substring(0, 46);
+		String hodnota1 = substring(46, 61);
+		String hodnota2 = substring(72);
 		logger.debug("Souhrn: {} | {} | {}", nazev, hodnota1, hodnota2);
 		switch (nazev) {
 			case "Pocatecni zustatek":
@@ -186,6 +197,10 @@ public class RbTextVypisParser implements Closeable {
 	}
 
 	private void parsePohyby() throws IOException {
+		if (isEmptyLine()) {
+			stav = Stav.PATICKA;
+			return;
+		}
 		canEnd = false;
 		transakce = new BankovniTransakce();
 		seznamTransakci.add(transakce);
@@ -195,31 +210,40 @@ public class RbTextVypisParser implements Closeable {
 		nextLine();
 		parsePohybyRadek3();
 		nextLine();
+		if (!isSingleSeparator()) {
+			parsePohybyRadek4();
+			nextLine();
+		}
 		singleSeparator();
 		canEnd = true;
 	}
 
 	private void parsePohybyRadek1() {
-//		transakce.setPoradoveCislo(Integer.valueOf(line.substring(0, 4).trim()));
-		transakce.setDatum(parseDayMonth(line.substring(5, 11)));
-		transakce.setKomentar(line.substring(11, 33).trim());
-//		transakce.setOdepsano(parseDayMonth(line.substring(33, 39)));
-		transakce.setSpecifickySymbol(line.substring(44, 54).trim());
-		transakce.setCastka(parseCastka(line.substring(56, 76).trim()));
-		transakce.setPoplatek(parseCastka(line.substring(77, 86).trim()));
+		transakce.setIdTransakce(Long.valueOf(substring(0, 4)));
+		transakce.setDatum(parseDayMonth(substring(5, 11)));
+		transakce.setKomentar(substring(11, 33));
+		transakce.setDatumOdepsano(parseDayMonth(substring(33, 39)));
+		transakce.setSpecifickySymbol(substring(44, 54));
+		transakce.setCastka(parseCastka(substring(56, 76)));
+		transakce.setPoplatek(parseCastka(substring(77, 86)));
 	}
 
 	private void parsePohybyRadek2() {
-//		transakce.setCas(LocalTime.parse(line.substring(5, 11), DATUM_POHYBU_FORMATTER));
-		transakce.getBankovniUcet().setNazev(line.substring(11, 33).trim());
-		transakce.setVariabilniSymbol(line.substring(44, 54).trim());
-//		transakce.setSmena(parseCastka(line.substring(77, 86).trim()));
+		transakce.setDatumCas(LocalDateTime.of(transakce.getDatum(), LocalTime.parse(substring(5, 11), CAS_POHYBU_FORMATTER)));
+		transakce.getBankovniUcet().setNazev(substring(11, 33));
+		transakce.setVariabilniSymbol(substring(44, 54));
+		transakce.setPoplatekSmena(parseCastka(substring(77, 86)));
 	}
 
 	private void parsePohybyRadek3() {
-		transakce.getBankovniUcet().setCeleCislo(line.substring(11, 33).trim());
-		transakce.setKomentar(line.substring(44, 54).trim());
-		transakce.setZpravaProPrijemce(line.substring(77, 86).trim());
+		transakce.getBankovniUcet().setCeleCislo(substring(11, 33));
+		transakce.setKonstantniSymbol(substring(44, 54));
+		transakce.setTyp(substring(55, 76));
+		transakce.setPoplatekZprava(parseCastka(substring(77, 86)));
+	}
+
+	private void parsePohybyRadek4() {
+		transakce.setKomentar(substring(11));
 	}
 
 	private boolean matches(Pattern pattern) {
@@ -251,6 +275,23 @@ public class RbTextVypisParser implements Closeable {
 		return line.isEmpty();
 	}
 
+	private String substring(int begin, int end) {
+		if (line.length() <= begin) {
+			return EMPTY_STRING;
+		}
+		if (end > line.length()) {
+			return StringUtil.trimDown(line.substring(begin));
+		}
+		return StringUtil.trimDown(line.substring(begin, end));
+	}
+
+	private String substring(int begin) {
+		if (line.length() <= begin) {
+			return EMPTY_STRING;
+		}
+		return StringUtil.trimDown(line.substring(begin));
+	}
+
 	private void formatException() {
 		throw new IllegalArgumentException(String.format("Neočekávaný text bankovního výpisu na řádku %d: %s", reader.getLineNumber(), line));
 	}
@@ -268,8 +309,12 @@ public class RbTextVypisParser implements Closeable {
 		return cisloVypisu;
 	}
 
-	public LocalDate getDatumVypisu() {
-		return datumVypisu;
+	public LocalDate getObdobiVypisuOd() {
+		return obdobiVypisuOd;
+	}
+
+	public LocalDate getObdobiVypisuDo() {
+		return obdobiVypisuDo;
 	}
 
 	public BigDecimal getPocatecniZustatek() {
@@ -296,7 +341,7 @@ public class RbTextVypisParser implements Closeable {
 	}
 
 	private LocalDate parseDayMonth(String text) {
-		return DATUM_POHYBU_FORMATTER.parse(text, temporal -> LocalDate.of(datumVypisu.getYear(), temporal.get(ChronoField.MONTH_OF_YEAR), temporal.get(ChronoField.DAY_OF_MONTH)));
+		return DATUM_POHYBU_FORMATTER.parse(text, temporal -> LocalDate.of(obdobiVypisuOd.getYear(), temporal.get(ChronoField.MONTH_OF_YEAR), temporal.get(ChronoField.DAY_OF_MONTH)));
 	}
 
 	private enum Stav {
@@ -306,7 +351,8 @@ public class RbTextVypisParser implements Closeable {
 		SOUHRN,
 		ZPRAVA,
 		HLAVICKA,
-		POHYBY
+		POHYBY,
+		PATICKA,
 	}
 
 }

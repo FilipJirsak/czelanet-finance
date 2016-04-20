@@ -4,6 +4,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by jirsakf on 18.4.2016.
@@ -14,10 +15,18 @@ public class BankovniTransakce {
 	@NotNull
 	private LocalDate datum;
 
+	private LocalDateTime datumCas;
+
+	private LocalDate datumOdepsano;
+
 	@NotNull
 	private BigDecimal castka;
 
 	private BigDecimal poplatek;
+
+	private BigDecimal poplatekSmena;
+
+	private BigDecimal poplatekZprava;
 
 	@NotNull
 	private String mena;
@@ -57,6 +66,22 @@ public class BankovniTransakce {
 
 	public void setDatum(LocalDate datum) {
 		this.datum = datum;
+	}
+
+	public LocalDateTime getDatumCas() {
+		return datumCas;
+	}
+
+	public void setDatumCas(LocalDateTime datumCas) {
+		this.datumCas = datumCas;
+	}
+
+	public LocalDate getDatumOdepsano() {
+		return datumOdepsano;
+	}
+
+	public void setDatumOdepsano(LocalDate datumOdepsano) {
+		this.datumOdepsano = datumOdepsano;
 	}
 
 	public BigDecimal getCastka() {
@@ -153,5 +178,99 @@ public class BankovniTransakce {
 
 	public void setIdPokynu(String idPokynu) {
 		this.idPokynu = idPokynu;
+	}
+
+	public BigDecimal getPoplatekSmena() {
+		return poplatekSmena;
+	}
+
+	public void setPoplatekSmena(BigDecimal poplatekSmena) {
+		this.poplatekSmena = poplatekSmena;
+	}
+
+	public BigDecimal getPoplatekZprava() {
+		return poplatekZprava;
+	}
+
+	public void setPoplatekZprava(BigDecimal poplatekZprava) {
+		this.poplatekZprava = poplatekZprava;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append(idTransakce);
+		sb.append(' ');
+		sb.append(datum);
+		sb.append(' ');
+		bankovniUcet.getCeleCislo(sb);
+		sb.append(' ');
+		sb.append(castka);
+		sb.append(' ');
+		sb.append(mena);
+		if (variabilniSymbol != null) {
+			sb.append(" VS: ");
+			sb.append(variabilniSymbol);
+		}
+		if (konstantniSymbol != null) {
+			sb.append(" KS: ");
+			sb.append(konstantniSymbol);
+		}
+		if (specifickySymbol != null) {
+			sb.append(" SS: ");
+			sb.append(specifickySymbol);
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof BankovniTransakce)) return false;
+
+		BankovniTransakce that = (BankovniTransakce) o;
+
+		if (!idTransakce.equals(that.idTransakce)) return false;
+		if (!datum.equals(that.datum)) return false;
+		if (!castka.equals(that.castka)) return false;
+		if (datumCas != null ? !datumCas.equals(that.datumCas) : that.datumCas != null) return false;
+		if (datumOdepsano != null ? !datumOdepsano.equals(that.datumOdepsano) : that.datumOdepsano != null) return false;
+		if (poplatek != null ? !poplatek.equals(that.poplatek) : that.poplatek != null) return false;
+		if (poplatekSmena != null ? !poplatekSmena.equals(that.poplatekSmena) : that.poplatekSmena != null) return false;
+		if (poplatekZprava != null ? !poplatekZprava.equals(that.poplatekZprava) : that.poplatekZprava != null) return false;
+		if (mena != null ? !mena.equals(that.mena) : that.mena != null) return false;
+		if (bankovniUcet != null ? !bankovniUcet.equals(that.bankovniUcet) : that.bankovniUcet != null) return false;
+		if (uzivatelskaIdentifikace != null ? !uzivatelskaIdentifikace.equals(that.uzivatelskaIdentifikace) : that.uzivatelskaIdentifikace != null) return false;
+		if (zpravaProPrijemce != null ? !zpravaProPrijemce.equals(that.zpravaProPrijemce) : that.zpravaProPrijemce != null) return false;
+		if (komentar != null ? !komentar.equals(that.komentar) : that.komentar != null) return false;
+		if (typ != null ? !typ.equals(that.typ) : that.typ != null) return false;
+		if (variabilniSymbol != null ? !variabilniSymbol.equals(that.variabilniSymbol) : that.variabilniSymbol != null) return false;
+		if (konstantniSymbol != null ? !konstantniSymbol.equals(that.konstantniSymbol) : that.konstantniSymbol != null) return false;
+		if (specifickySymbol != null ? !specifickySymbol.equals(that.specifickySymbol) : that.specifickySymbol != null) return false;
+		return idPokynu != null ? idPokynu.equals(that.idPokynu) : that.idPokynu == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = idTransakce.hashCode();
+		result = 31 * result + datum.hashCode();
+		result = 31 * result + castka.hashCode();
+		result = 31 * result + (datumCas != null ? datumCas.hashCode() : 0);
+		result = 31 * result + (datumOdepsano != null ? datumOdepsano.hashCode() : 0);
+		result = 31 * result + (poplatek != null ? poplatek.hashCode() : 0);
+		result = 31 * result + (poplatekSmena != null ? poplatekSmena.hashCode() : 0);
+		result = 31 * result + (poplatekZprava != null ? poplatekZprava.hashCode() : 0);
+		result = 31 * result + (mena != null ? mena.hashCode() : 0);
+		result = 31 * result + (bankovniUcet != null ? bankovniUcet.hashCode() : 0);
+		result = 31 * result + (uzivatelskaIdentifikace != null ? uzivatelskaIdentifikace.hashCode() : 0);
+		result = 31 * result + (zpravaProPrijemce != null ? zpravaProPrijemce.hashCode() : 0);
+		result = 31 * result + (komentar != null ? komentar.hashCode() : 0);
+		result = 31 * result + (typ != null ? typ.hashCode() : 0);
+		result = 31 * result + (variabilniSymbol != null ? variabilniSymbol.hashCode() : 0);
+		result = 31 * result + (konstantniSymbol != null ? konstantniSymbol.hashCode() : 0);
+		result = 31 * result + (specifickySymbol != null ? specifickySymbol.hashCode() : 0);
+		result = 31 * result + (idPokynu != null ? idPokynu.hashCode() : 0);
+		return result;
 	}
 }

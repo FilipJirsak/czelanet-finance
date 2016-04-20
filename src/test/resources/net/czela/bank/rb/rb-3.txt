@@ -1,0 +1,48 @@
+Raiffeisenbank a.s. 
+Bankovni vypis c. 61
+za 05.04.2016
+
+Nazev uctu: czela.net
+Cislo uctu: 1222733001/5500
+IBAN:       CZ1855000000001222733001
+Mena:       CZK
+
+
+
+
+
+
+
+======================================================================================
+                                              Od pocatku roku         Za obdobi vypisu
+======================================================================================
+Pocatecni zustatek                                                           24 582.01
+Prijmy                                             192 054.28                     0.00
+Vydaje                                            -273 745.43               -12 152.00
+Z toho poplatky                                                                   0.00
+Konecny zustatek                                                             12 430.01
+Z toho blokovano                                                                  0.00
+Pohledavky po splatnosti                                                          0.00
+Disponibilni zustatek                                                        12 430.01
+======================================================================================
+Zprava pro klienta
+Vklad na tomto uctu podleha ochrane, kterou poskytuje system pojisteni pohledavek
+z vkladu. Podrobnejsi prehled o systemu pojisteni pohledavek z vkladu je k dispozici
+na webovych strankach banky na adrese www.rb.cz.
+
+
+Pohyby na beznem uctu
+======================================================================================
+P.C. Datum Poznamka              Odeps.     SS                        Castka  Poplatek
+     Cas   Nazev uctu            Valuta     VS                                   Smena
+           Cislo uctu                       KS         Typ transakce            Zprava
+======================================================================================
+   1 05.04.                      05.04.                            -2 552.00
+     09:12 Kabel Kabelovic                  2016004
+           676706767/5500                              Prevod
+           kabelaz Kotelna Hybesova
+--------------------------------------------------------------------------------------
+   2 05.04.Okruh freetel - 3/201605.04.                            -9 600.00
+     09:18                                  16230
+           2900089556/2010                             Prevod
+--------------------------------------------------------------------------------------

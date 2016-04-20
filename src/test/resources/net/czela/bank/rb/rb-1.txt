@@ -1,0 +1,47 @@
+Raiffeisenbank a.s. 
+Bankovni vypis c. 67
+za 13.04.2016
+
+Nazev uctu: czela.net
+Cislo uctu: 1222733001/5500
+IBAN:       CZ1855000000001222733001
+Mena:       CZK
+
+
+
+
+
+
+
+======================================================================================
+                                              Od pocatku roku         Za obdobi vypisu
+======================================================================================
+Pocatecni zustatek                                                           23 280.01
+Prijmy                                             203 604.28                   700.00
+Vydaje                                            -273 745.43                     0.00
+Z toho poplatky                                                                   0.00
+Konecny zustatek                                                             23 980.01
+Z toho blokovano                                                                  0.00
+Pohledavky po splatnosti                                                          0.00
+Disponibilni zustatek                                                        23 980.01
+======================================================================================
+Zprava pro klienta
+Vklad na tomto uctu podleha ochrane, kterou poskytuje system pojisteni pohledavek 
+z vkladu. Podrobnejsi prehled o systemu pojisteni pohledavek z vkladu je k dispozici 
+na webovych strankach banky na adrese www.rb.cz.
+
+
+Pohyby na beznem uctu
+======================================================================================
+P.C. Datum Poznamka              Odeps.     SS                        Castka  Poplatek
+     Cas   Nazev uctu            Valuta     VS                                   Smena
+           Cislo uctu                       KS         Typ transakce            Zprava
+======================================================================================
+   1 13.04.                      13.04.                               350.00          
+     05:25 NOVAK JIRI                       7080                                      
+           43-6172590012/0100                          Prichozi platba                
+--------------------------------------------------------------------------------------
+   2 13.04.Internet              13.04.                               350.00          
+     07:10 BILA ANASTAZIE                   5915                                      
+           150970012/0600                   308        Prichozi platba                
+--------------------------------------------------------------------------------------

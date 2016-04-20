@@ -1,5 +1,7 @@
 package net.czela.bank.dto;
 
+import jodd.util.StringUtil;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.util.IllegalFormatException;
@@ -87,6 +89,12 @@ public class BankovniUcet {
 
 	public String getCeleCislo() {
 		StringBuilder builder = new StringBuilder();
+		getCeleCislo(builder);
+
+		return builder.toString();
+	}
+
+	protected void getCeleCislo(StringBuilder builder) {
 		if (predcisli != null) {
 			builder.append(predcisli);
 			builder.append('-');
@@ -94,8 +102,6 @@ public class BankovniUcet {
 		builder.append(cislo);
 		builder.append('/');
 		builder.append(kodBanky);
-
-		return builder.toString();
 	}
 
 	public void setCeleCislo(String text) {
@@ -119,5 +125,43 @@ public class BankovniUcet {
 		BankovniUcet bankovniUcet = new BankovniUcet();
 		bankovniUcet.setCeleCislo(text);
 		return bankovniUcet;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder();
+		getCeleCislo(builder);
+		if (StringUtil.isNotEmpty(nazev)) {
+			builder.append(' ');
+			builder.append('[');
+			builder.append(nazev);
+			builder.append(']');
+		}
+		return builder.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof BankovniUcet)) return false;
+
+		BankovniUcet that = (BankovniUcet) o;
+
+		if (nazev != null ? !nazev.equals(that.nazev) : that.nazev != null) return false;
+		if (predcisli != null ? !predcisli.equals(that.predcisli) : that.predcisli != null) return false;
+		if (!cislo.equals(that.cislo)) return false;
+		if (!kodBanky.equals(that.kodBanky)) return false;
+		return nazevBanky != null ? nazevBanky.equals(that.nazevBanky) : that.nazevBanky == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = nazev != null ? nazev.hashCode() : 0;
+		result = 31 * result + (predcisli != null ? predcisli.hashCode() : 0);
+		result = 31 * result + cislo.hashCode();
+		result = 31 * result + kodBanky.hashCode();
+		result = 31 * result + (nazevBanky != null ? nazevBanky.hashCode() : 0);
+		return result;
 	}
 }
