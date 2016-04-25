@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 public class BankovniUcet {
 
 	private static final Pattern RE_FORMAT = Pattern.compile("(?:(\\d{1,6})-)?(\\d{1,10})/(\\d{4})");
+	private static final Pattern RE_FORMAT_PREDCISLI_CISLO = Pattern.compile("(?:(\\d{1,6})-)?(\\d{1,10})");
 
 	private String nazev;
 
@@ -88,6 +89,10 @@ public class BankovniUcet {
 	}
 
 	public String getCeleCislo() {
+		if (StringUtil.isAllEmpty(predcisli, cislo, kodBanky)) {
+			return null;
+		}
+
 		StringBuilder builder = new StringBuilder();
 		getCeleCislo(builder);
 
@@ -95,6 +100,9 @@ public class BankovniUcet {
 	}
 
 	protected void getCeleCislo(StringBuilder builder) {
+		if (StringUtil.isAllEmpty(predcisli, cislo, kodBanky)) {
+			return;
+		}
 		if (predcisli != null) {
 			builder.append(predcisli);
 			builder.append('-');
@@ -105,7 +113,9 @@ public class BankovniUcet {
 	}
 
 	public void setCeleCislo(String text) {
-		assert text != null;
+		if (text == null) {
+			return;
+		}
 
 		Matcher matcher = RE_FORMAT.matcher(text);
 		if (!matcher.matches()) {
@@ -115,6 +125,20 @@ public class BankovniUcet {
 		this.predcisli = matcher.group(1);
 		this.cislo = matcher.group(2);
 		this.kodBanky = matcher.group(3);
+	}
+
+	public void setPredcisliCislo(String text) {
+		if (text == null) {
+			return;
+		}
+
+		Matcher matcher = RE_FORMAT_PREDCISLI_CISLO.matcher(text);
+		if (!matcher.matches()) {
+			throw new IllegalArgumentException(String.format("Chybný formát čísla účtu: %s", text));
+		}
+
+		this.predcisli = matcher.group(1);
+		this.cislo = matcher.group(2);
 	}
 
 	public static BankovniUcet parse(String text) {

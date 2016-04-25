@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 /**
  * Created by jirsakf on 18.4.2016.
  */
-public class RbTextVypisParser implements Closeable {
+public class RbTextVypisParser implements Closeable, net.czela.bank.service.Parser {
 
 	private static final Pattern RE_VYPIS_C = Pattern.compile("Bankovni vypis c. (\\d+)");
 	private static final Pattern RE_VYPIS_DATUM = Pattern.compile("za (\\d{2}\\.\\d{2}\\.\\d{4})");
@@ -46,7 +46,7 @@ public class RbTextVypisParser implements Closeable {
 	private Matcher matcher;
 
 	private BankovniUcet bankovniUcet = new BankovniUcet();
-	private int cisloVypisu;
+	private String cisloVypisu;
 	private LocalDate obdobiVypisuOd;
 	private LocalDate obdobiVypisuDo;
 	private BigDecimal pocatecniZustatek;
@@ -114,7 +114,7 @@ public class RbTextVypisParser implements Closeable {
 			logger.debug("Banka: {}", line);
 			bankovniUcet.setNazevBanky(line.trim());
 		} else if (matches(RE_VYPIS_C)) {
-			cisloVypisu = Integer.parseInt(matcher.group(1));
+			cisloVypisu = matcher.group(1);
 		} else if (matches(RE_VYPIS_DATUM)) {
 			obdobiVypisuOd = LocalDate.parse(matcher.group(1), DATUM_VYPISU_FORMATTER);
 			obdobiVypisuDo = obdobiVypisuOd;
@@ -301,26 +301,32 @@ public class RbTextVypisParser implements Closeable {
 		reader.close();
 	}
 
+	@Override
 	public BankovniUcet getBankovniUcet() {
 		return bankovniUcet;
 	}
 
-	public int getCisloVypisu() {
+	@Override
+	public String getCisloVypisu() {
 		return cisloVypisu;
 	}
 
+	@Override
 	public LocalDate getObdobiVypisuOd() {
 		return obdobiVypisuOd;
 	}
 
+	@Override
 	public LocalDate getObdobiVypisuDo() {
 		return obdobiVypisuDo;
 	}
 
+	@Override
 	public BigDecimal getPocatecniZustatek() {
 		return pocatecniZustatek;
 	}
 
+	@Override
 	public BigDecimal getKonecnyZustatek() {
 		return konecnyZustatek;
 	}
@@ -329,6 +335,7 @@ public class RbTextVypisParser implements Closeable {
 		return zprava.toString();
 	}
 
+	@Override
 	public List<BankovniTransakce> getTransakce() {
 		return seznamTransakci;
 	}

@@ -20,7 +20,7 @@ public class BankovniTransakce {
 	private LocalDate datumOdepsano;
 
 	@NotNull
-	private BigDecimal castka;
+	private BigDecimal castka = BigDecimal.ZERO;
 
 	private BigDecimal poplatek;
 
@@ -89,7 +89,11 @@ public class BankovniTransakce {
 	}
 
 	public void setCastka(BigDecimal castka) {
-		this.castka = castka;
+		if (castka != null) {
+			this.castka = castka;
+		} else {
+			this.castka = BigDecimal.ZERO;
+		}
 	}
 
 	public BigDecimal getPoplatek() {

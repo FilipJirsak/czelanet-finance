@@ -57,6 +57,8 @@ dependencies {
 			'org.jodd:jodd-core:3.7',
 
 			'org.dom4j:dom4j:2.0.0',
+
+			'org.apache.httpcomponents:httpclient:4.5.2',
 	)
 
 /*
