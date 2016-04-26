@@ -32,7 +32,7 @@ public class VypisyService {
 		this.parsovaneVypisyRepository = parsovaneVypisyRepository;
 	}
 
-	@Transactional(propagation = Propagation.NEVER)
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public void zpracovatVypisy() throws IOException, DocumentException {
 		List<VypisRaw> vypisy = nacistNezpracovaneVypisy();
 		zpracovatVypisy(vypisy);
@@ -50,7 +50,7 @@ public class VypisyService {
 		parsovaneVypisyRepository.zpracovatPlatby();
 	}
 
-	@Transactional(propagation = Propagation.NEVER)
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	private void zpracovatVypisy(List<VypisRaw> vypisy) throws IOException, DocumentException {
 		for (VypisRaw vypis : vypisy) {
 			switch (vypis.getBanka()) {
