@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccountStatement>
+	<Info>
+		<accountId>2600392940</accountId>
+		<bankId>2010</bankId>
+		<currency>CZK</currency>
+		<iban>CZ5020100000002600392940</iban>
+		<bic>FIOBCZPPXXX</bic>
+		<openingBalance>599388.01</openingBalance>
+		<closingBalance>602538.01</closingBalance>
+		<dateStart>2016-04-22+02:00</dateStart>
+		<dateEnd>2016-04-25+02:00</dateEnd>
+		<idFrom>9769329701</idFrom>
+		<idTo>9769457101</idTo>
+		<idLastDownload>9289753378</idLastDownload>
+	</Info>
+	<TransactionList>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769329701</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">350.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">1293341234</column_2>
+			<column_10 name="Název protiúčtu" id="10">Černý Petr</column_10>
+			<column_3 name="Kód banky" id="3">0800</column_3>
+			<column_12 name="Název banky" id="12">Česká spořitelna, a.s.</column_12>
+			<column_5 name="VS" id="5">6704</column_5>
+			<column_7 name="Uživatelská identifikace" id="7">Černý Petr</column_7>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Černý Petr</column_25>
+			<column_17 name="ID pokynu" id="17">11011715003</column_17>
+		</Transaction>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769333818</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">1050.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">35-5608123456</column_2>
+			<column_10 name="Název protiúčtu" id="10">Čapek Karel</column_10>
+			<column_3 name="Kód banky" id="3">0100</column_3>
+			<column_12 name="Název banky" id="12">Komerční banka a.s.</column_12>
+			<column_4 name="KS" id="4">0000</column_4>
+			<column_5 name="VS" id="5">6767</column_5>
+			<column_6 name="SS" id="6">0</column_6>
+			<column_7 name="Uživatelská identifikace" id="7">Čapek Karel</column_7>
+			<column_16 name="Zpráva pro příjemce" id="16">PLATBA NETU PLATBA NETU</column_16>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Čapek Karel</column_25>
+			<column_17 name="ID pokynu" id="17">11011731663</column_17>
+		</Transaction>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769349872</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">350.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">820490123</column_2>
+			<column_10 name="Název protiúčtu" id="10">Tichá Klára</column_10>
+			<column_3 name="Kód banky" id="3">0800</column_3>
+			<column_12 name="Název banky" id="12">Česká spořitelna, a.s.</column_12>
+			<column_4 name="KS" id="4">0308</column_4>
+			<column_5 name="VS" id="5">7182</column_5>
+			<column_7 name="Uživatelská identifikace" id="7">Tichá Klára</column_7>
+			<column_16 name="Zpráva pro příjemce" id="16">Tichá Klára,Rovná 1,Čelákovice</column_16>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Tichá Klára</column_25>
+			<column_17 name="ID pokynu" id="17">11011796276</column_17>
+		</Transaction>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769380758</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">350.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">173401111</column_2>
+			<column_10 name="Název protiúčtu" id="10">Červená Růžena</column_10>
+			<column_3 name="Kód banky" id="3">0600</column_3>
+			<column_12 name="Název banky" id="12">GE Money Bank, a.s.</column_12>
+			<column_5 name="VS" id="5">6890</column_5>
+			<column_7 name="Uživatelská identifikace" id="7">Červená Růžena</column_7>
+			<column_16 name="Zpráva pro příjemce" id="16">Červená Růžena</column_16>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Červená Růžena</column_25>
+			<column_17 name="ID pokynu" id="17">11011919240</column_17>
+		</Transaction>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769380759</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">350.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">209633123</column_2>
+			<column_10 name="Název protiúčtu" id="10">Novák Jan</column_10>
+			<column_3 name="Kód banky" id="3">0600</column_3>
+			<column_12 name="Název banky" id="12">GE Money Bank, a.s.</column_12>
+			<column_4 name="KS" id="4">0308</column_4>
+			<column_5 name="VS" id="5">7418</column_5>
+			<column_7 name="Uživatelská identifikace" id="7">Novák Jan</column_7>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Novák Jan</column_25>
+			<column_17 name="ID pokynu" id="17">11011919241</column_17>
+		</Transaction>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769412468</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">350.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">670100-2206381234</column_2>
+			<column_10 name="Název protiúčtu" id="10">Bílá Hana</column_10>
+			<column_3 name="Kód banky" id="3">6210</column_3>
+			<column_12 name="Název banky" id="12">mBank S.A., organizační složka</column_12>
+			<column_5 name="VS" id="5">6258</column_5>
+			<column_7 name="Uživatelská identifikace" id="7">Bílá Hana</column_7>
+			<column_16 name="Zpráva pro příjemce" id="16">CZELA.NET</column_16>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Bílá Hana</column_25>
+			<column_17 name="ID pokynu" id="17">11012129224</column_17>
+		</Transaction>
+		<Transaction>
+			<column_22 name="ID pohybu" id="22">9769457101</column_22>
+			<column_0 name="Datum" id="0">2016-04-25+02:00</column_0>
+			<column_1 name="Objem" id="1">350.00</column_1>
+			<column_14 name="Měna" id="14">CZK</column_14>
+			<column_2 name="Protiúčet" id="2">1738449123</column_2>
+			<column_10 name="Název protiúčtu" id="10">Malá Petra</column_10>
+			<column_3 name="Kód banky" id="3">0800</column_3>
+			<column_12 name="Název banky" id="12">Česká spořitelna, a.s.</column_12>
+			<column_5 name="VS" id="5">6861</column_5>
+			<column_7 name="Uživatelská identifikace" id="7">Malá Petra</column_7>
+			<column_8 name="Typ" id="8">Bezhotovostní příjem</column_8>
+			<column_25 name="Komentář" id="25">Malá Petra</column_25>
+			<column_17 name="ID pokynu" id="17">11012308663</column_17>
+		</Transaction>
+	</TransactionList>
+</AccountStatement>

@@ -1,5 +1,7 @@
-package net.czela.bank.rb;
+package net.czela.bank.fio;
 
+import jodd.io.StreamUtil;
+import org.dom4j.DocumentException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,11 +14,11 @@ import static org.testng.Assert.assertNull;
 /**
  * Created by jirsakf on 20.4.2016.
  */
-public abstract class AbstractRbTextVypisParserTest {
-	protected final RbTextVypisParser parser;
+public abstract class AbstractFioXmlVypisParserTest {
+	protected final FioXmlVypisParser parser;
 
-	public AbstractRbTextVypisParserTest(String filename) {
-		this.parser = new RbTextVypisParser(AbstractRbTextVypisParserTest.class.getResourceAsStream(filename));
+	public AbstractFioXmlVypisParserTest(String filename) throws IOException, DocumentException {
+		this.parser = new FioXmlVypisParser(new String(StreamUtil.readChars(AbstractFioXmlVypisParserTest.class.getResourceAsStream(filename), "UTF-8")));
 	}
 
 	@BeforeClass
@@ -31,13 +33,13 @@ public abstract class AbstractRbTextVypisParserTest {
 
 	@Test
 	public void testNazevBanky() throws IOException {
-		assertEquals(parser.getBankovniUcet().getNazevBanky(), "Raiffeisenbank a.s.");
+		assertNull(parser.getBankovniUcet().getNazevBanky());
 
 	}
 
 	@Test
 	public void testNazevUctu() throws IOException {
-		assertEquals(parser.getBankovniUcet().getNazev(), "czela.net");
+		assertNull(parser.getBankovniUcet().getNazev(), null);
 	}
 
 	@Test
@@ -48,13 +50,13 @@ public abstract class AbstractRbTextVypisParserTest {
 
 	@Test
 	public void testCisloUctu() throws IOException {
-		assertEquals(parser.getBankovniUcet().getCislo(), "1222733001");
+		assertEquals(parser.getBankovniUcet().getCislo(), "2600392940");
 
 	}
 
 	@Test
 	public void testKodBanky() throws IOException {
-		assertEquals(parser.getBankovniUcet().getKodBanky(), "5500");
+		assertEquals(parser.getBankovniUcet().getKodBanky(), "2010");
 	}
 
 

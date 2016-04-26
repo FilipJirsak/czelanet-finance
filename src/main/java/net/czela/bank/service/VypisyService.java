@@ -7,6 +7,7 @@ import net.czela.bank.repository.ParsovaneVypisyRepository;
 import net.czela.bank.repository.UploadovaneVypisyRepository;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,9 +38,16 @@ public class VypisyService {
 		zpracovatVypisy(vypisy);
 	}
 
+	@Transactional
 	public void zpracovatVypisy(int ids) throws IOException, DocumentException {
 		List<VypisRaw> vypisy = nacistVypisy(ids);
 		zpracovatVypisy(vypisy);
+	}
+
+	@Async
+	@Transactional
+	public void zpracovatPlatby() {
+		parsovaneVypisyRepository.zpracovatPlatby();
 	}
 
 	@Transactional(propagation = Propagation.NEVER)
@@ -70,7 +78,7 @@ public class VypisyService {
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	private void zpracujVypisRB(VypisRaw vypis) throws IOException {
-		try (RbTextVypisParser parser = new RbTextVypisParser(new LineNumberReader(new StringReader(vypis.getVypis())))) {
+		try (RbTextVypisParser parser = new RbTextVypisParser(vypis.getVypis())) {
 			parser.read();
 			parsovaneVypisyRepository.zapsatTransakce(parser.getTransakce(), vypis.getId());
 			uploadovaneVypisyRepository.vypisZpracovan(vypis.getId());

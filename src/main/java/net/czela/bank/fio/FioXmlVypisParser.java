@@ -41,6 +41,7 @@ public class FioXmlVypisParser implements Parser, Closeable {
 		}
 	}
 
+	@Override
 	public void read() {
 		Element root = document.getRootElement();
 		Element info = root.element("Info");
@@ -50,7 +51,9 @@ public class FioXmlVypisParser implements Parser, Closeable {
 		konecnyZustatek = new BigDecimal(info.elementText("closingBalance"));
 		obdobiVypisuOd = LocalDate.parse(info.elementText("dateStart"), DATUM_VYPISU_FORMATTER);
 		obdobiVypisuDo = LocalDate.parse(info.elementText("dateEnd"), DATUM_VYPISU_FORMATTER);
-		cisloVypisu = String.format("%s-%s", info.elementText("idFrom"), info.elementText("idTo"));
+		if (info.element("idFrom") != null && info.element("idTo") != null) {
+			cisloVypisu = String.format("%s-%s", info.elementText("idFrom"), info.elementText("idTo"));
+		}
 
 		Element transactionList = root.element("TransactionList");
 		for (Element transactionElement : transactionList.elements("Transaction")) {

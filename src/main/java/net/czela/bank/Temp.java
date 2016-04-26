@@ -37,6 +37,8 @@ public class Temp implements CommandLineRunner{
 //		vypisyService.zpracovatVypisy(3140);
 //		fioAPIKlient.nastavitZarazku(9289753378L);
 //		System.out.println(fioAPIKlient.nacistPohybyOdMinule(FioAPIFormatTransakci.XML));
-		vypisyService.zpracovatVypisy(3141);
+//		vypisyService.zpracovatVypisy(3142);
+//		System.out.println(fioAPIKlient.nacistPohybyOdMinule(FioAPIFormatTransakci.XML));
+		vypisyService.zpracovatVypisy(3143);
 	}
 }

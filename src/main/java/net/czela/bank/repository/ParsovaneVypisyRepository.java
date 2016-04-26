@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -24,10 +25,12 @@ public class ParsovaneVypisyRepository {
 	private final Logger logger = LoggerFactory.getLogger(ParsovaneVypisyRepository.class);
 
 	private final NamedParameterJdbcTemplate jdbc;
+	private final SimpleJdbcCall urcitTypyPlatebProcedure;
 
 	@Autowired
 	public ParsovaneVypisyRepository(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+		this.urcitTypyPlatebProcedure = new SimpleJdbcCall(dataSource).withProcedureName("urcit_typy_plateb");
 	}
 
 	public void zapsatTransakce(List<BankovniTransakce> seznameTransakci, int vypisId) {
@@ -51,5 +54,9 @@ public class ParsovaneVypisyRepository {
 		}
 		jdbc.batchUpdate("INSERT INTO parsovane_vypisy (porad_cislo, datum, nazev_protiuctu, cislo_protiuctu, vs, ks, ss, castka, poplatek, poznamka, zprava, id_vypisu)"
 				+ " VALUES(:idTransakce, :datum, :nazevProtiuctu, :cisloProtiuctu, :vs, :ks, :ss, :castka, :poplatek, :poznamka, :zprava, :idVypisu)", params);
+	}
+
+	public void zpracovatPlatby() {
+		urcitTypyPlatebProcedure.execute();
 	}
 }

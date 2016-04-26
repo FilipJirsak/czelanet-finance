@@ -1,11 +1,13 @@
 package net.czela.bank.repository;
 
+import net.czela.bank.dto.UploadovanyVypis;
 import net.czela.bank.dto.VypisRaw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -37,6 +39,10 @@ public class UploadovaneVypisyRepository {
 
 	public List<VypisRaw> nacistVypisy(int ids) {
 		return jdbc.query("SELECT id, vypis, banka FROM uploadovane_vypisy WHERE id IN (:id)", new MapSqlParameterSource("id", ids), vypisRawRowMapper);
+	}
+
+	public void zapsatVypis(UploadovanyVypis vypis) {
+		jdbc.update("INSERT INTO uploadovane_vypisy (vypis, cislo_vypisu, obdobi_od, obdobi_do, pocatecni_zustatek, koncovy_zustatek, banka_id) VALUES(:vypis, :cisloVypisu, :obdobiOd, :obdobiDo, :pocatecniZustatek, :konecnyZustatek, :banka.id)", new BeanPropertySqlParameterSource(vypis));
 	}
 
 	public void vypisZpracovan(int id) {

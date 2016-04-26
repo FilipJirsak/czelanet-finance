@@ -23,36 +23,8 @@ public class Rb3TextVypisParserTest extends AbstractRbTextVypisParserTest {
 	}
 
 	@Test
-	public void testNazevBanky() throws IOException {
-		assertEquals(parser.getBankovniUcet().getNazevBanky(), "Raiffeisenbank a.s.");
-
-	}
-
-	@Test
-	public void testNazevUctu() throws IOException {
-		assertEquals(parser.getBankovniUcet().getNazev(), "czela.net");
-	}
-
-	@Test
-	public void testPredcisliUctu() throws IOException {
-		assertNull(parser.getBankovniUcet().getPredcisli());
-
-	}
-
-	@Test
-	public void testCisloUctu() throws IOException {
-		assertEquals(parser.getBankovniUcet().getCislo(), "1222733001");
-
-	}
-
-	@Test
-	public void testKodBanky() throws IOException {
-		assertEquals(parser.getBankovniUcet().getKodBanky(), "5500");
-	}
-
-	@Test
 	public void testCisloVypisu() throws IOException {
-		assertEquals(parser.getCisloVypisu(), 61);
+		assertEquals(parser.getCisloVypisu(), "61");
 	}
 
 	@Test

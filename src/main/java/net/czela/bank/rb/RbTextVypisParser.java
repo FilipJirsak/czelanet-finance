@@ -3,6 +3,7 @@ package net.czela.bank.rb;
 import jodd.util.StringUtil;
 import net.czela.bank.dto.BankovniTransakce;
 import net.czela.bank.dto.BankovniUcet;
+import net.czela.bank.service.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 /**
  * Created by jirsakf on 18.4.2016.
  */
-public class RbTextVypisParser implements Closeable, net.czela.bank.service.Parser {
+public class RbTextVypisParser implements Closeable, Parser {
 
 	private static final Pattern RE_VYPIS_C = Pattern.compile("Bankovni vypis c. (\\d+)");
 	private static final Pattern RE_VYPIS_DATUM = Pattern.compile("za (\\d{2}\\.\\d{2}\\.\\d{4})");
@@ -64,10 +65,15 @@ public class RbTextVypisParser implements Closeable, net.czela.bank.service.Pars
 		this(new LineNumberReader(reader));
 	}
 
+	public RbTextVypisParser(String vypis) {
+		this(new StringReader(vypis));
+	}
+
 	public RbTextVypisParser(InputStream inputStream) {
 		this(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
 	}
 
+	@Override
 	public void read() throws IOException {
 		while (nextLine()) {
 			switch (stav) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccountStatement>
+	<Info>
+		<accountId>2600392940</accountId>
+		<bankId>2010</bankId>
+		<currency>CZK</currency>
+		<iban>CZ5020100000002600392940</iban>
+		<bic>FIOBCZPPXXX</bic>
+		<openingBalance>599388.01</openingBalance>
+		<closingBalance>599388.01</closingBalance>
+		<dateStart>2016-04-24+02:00</dateStart>
+		<dateEnd>2016-04-24+02:00</dateEnd>
+	</Info>
+	<TransactionList/>
+</AccountStatement>
