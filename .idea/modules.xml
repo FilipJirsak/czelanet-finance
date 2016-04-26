@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/czelanet-finance.iml" filepath="$PROJECT_DIR$/.idea/modules/czelanet-finance.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/czelanet-finance_main.iml" filepath="$PROJECT_DIR$/.idea/modules/czelanet-finance_main.iml" group="czelanet-finance" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/czelanet-finance_test.iml" filepath="$PROJECT_DIR$/.idea/modules/czelanet-finance_test.iml" group="czelanet-finance" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/finance.iml" filepath="$PROJECT_DIR$/.idea/modules/finance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/finance_main.iml" filepath="$PROJECT_DIR$/.idea/modules/finance_main.iml" group="finance" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/finance_test.iml" filepath="$PROJECT_DIR$/.idea/modules/finance_test.iml" group="finance" />
     </modules>
   </component>
 </project>

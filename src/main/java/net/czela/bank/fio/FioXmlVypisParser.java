@@ -42,7 +42,7 @@ public class FioXmlVypisParser implements Parser, Closeable {
 	}
 
 	@Override
-	public void read() {
+	public boolean read() {
 		Element root = document.getRootElement();
 		Element info = root.element("Info");
 		bankovniUcet.setCislo(info.elementText("accountId"));
@@ -56,7 +56,10 @@ public class FioXmlVypisParser implements Parser, Closeable {
 		}
 
 		Element transactionList = root.element("TransactionList");
-		for (Element transactionElement : transactionList.elements("Transaction")) {
+		List<Element> transactions = transactionList.elements("Transaction");
+		if (transactions.isEmpty())
+			return false;
+		for (Element transactionElement : transactions) {
 			BankovniTransakce transakce = new BankovniTransakce();
 			transakce.setIdTransakce(Long.parseLong(getValue(transactionElement, "ID pohybu")));
 			transakce.setDatum(LocalDate.parse(getValue(transactionElement, "Datum"), DATUM_VYPISU_FORMATTER));
@@ -76,6 +79,7 @@ public class FioXmlVypisParser implements Parser, Closeable {
 			transakce.setIdPokynu(getValue(transactionElement, "ID pokynu"));
 			seznamTransakci.add(transakce);
 		}
+		return true;
 	}
 
 	@Override

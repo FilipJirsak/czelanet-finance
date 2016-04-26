@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface Parser extends Closeable {
 
-	void read() throws IOException;
+	boolean read() throws IOException;
 
 	BankovniUcet getBankovniUcet();
 

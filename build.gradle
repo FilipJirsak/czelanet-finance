@@ -23,7 +23,7 @@ apply plugin: 'war'
 apply plugin: 'aspectj'
 
 war {
-	baseName = 'finance'
+	baseName = 'banka'
 	version = '4.0.0-SNAPSHOT'
 }
 sourceCompatibility = 1.8
@@ -83,6 +83,10 @@ dependencies {
 	aspectpath(
 			'org.springframework:spring-aspects'
 	)
+}
+
+bootRepackage {
+	enabled = false
 }
 
 task wrapper(type: Wrapper) {

@@ -24,7 +24,11 @@ public abstract class AbstractUploadService {
 
 	public void zapsatVypis(String vypis) throws IOException, DocumentException {
 		try (Parser parser = createParser(vypis)) {
-			parser.read();
+			boolean notEmpty = parser.read();
+
+			if (!notEmpty) {
+				return;
+			}
 
 			UploadovanyVypis uploadovanyVypis = new UploadovanyVypis();
 			uploadovanyVypis.setBanka(banka);
@@ -42,4 +46,5 @@ public abstract class AbstractUploadService {
 	}
 
 	protected abstract Parser createParser(String vypis) throws IOException, DocumentException;
+
 }

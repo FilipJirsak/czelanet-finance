@@ -74,7 +74,7 @@ public class RbTextVypisParser implements Closeable, Parser {
 	}
 
 	@Override
-	public void read() throws IOException {
+	public boolean read() throws IOException {
 		while (nextLine()) {
 			switch (stav) {
 				case VYPIS:
@@ -105,6 +105,7 @@ public class RbTextVypisParser implements Closeable, Parser {
 					break;
 			}
 		}
+		return true;
 	}
 
 	private boolean nextLine() throws IOException {

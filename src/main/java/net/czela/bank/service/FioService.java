@@ -7,6 +7,7 @@ import net.czela.bank.fio.FioAPIKlient;
 import net.czela.bank.fio.FioXmlVypisParser;
 import net.czela.bank.repository.UploadovaneVypisyRepository;
 import org.dom4j.DocumentException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class FioService extends AbstractUploadService {
 
 	private final FioAPIKlient fioAPIKlient;
 
+	@Autowired
 	public FioService(FioAPIKlient fioAPIKlient, UploadovaneVypisyRepository uploadovaneVypisyRepository, VypisyService vypisyService) {
 		super(Banka.FIO, uploadovaneVypisyRepository, vypisyService);
 		this.fioAPIKlient = fioAPIKlient;
