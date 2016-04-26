@@ -36,6 +36,13 @@ ALTER TABLE uploadovane_vypisy
 	MODIFY COLUMN banka_id TINYINT NOT NULL REFERENCES bankovni_ucet (id)
 	COMMENT 'Číslo účtu czela.net, ke kterému se výpis vztahuje';
 
+ALTER TABLE typ_platby
+	ADD COLUMN banka_id TINYINT REFERENCES bankovni_ucet (id);
+
+ALTER TABLE typ_platby
+	MODIFY COLUMN banka_id TINYINT NOT NULL
+	COMMENT 'Číslo účtu czela.net, ke kterému se typ platby vztahuje';
+
 DELIMITER |
 CREATE PROCEDURE kontrola_vypisu(pbanka VARCHAR(20), pdatum_od DATE, pdatum_do DATE)
 READS SQL DATA
