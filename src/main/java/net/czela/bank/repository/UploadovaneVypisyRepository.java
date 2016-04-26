@@ -34,11 +34,11 @@ public class UploadovaneVypisyRepository {
 	}
 
 	public List<VypisRaw> nacistNezpracovaneVypisy() {
-		return jdbc.query("SELECT id, vypis, banka FROM uploadovane_vypisy WHERE exportovano IS NULL", vypisRawRowMapper);
+		return jdbc.query("SELECT id, vypis, banka_id FROM uploadovane_vypisy WHERE exportovano IS NULL", vypisRawRowMapper);
 	}
 
 	public List<VypisRaw> nacistVypisy(int ids) {
-		return jdbc.query("SELECT id, vypis, banka FROM uploadovane_vypisy WHERE id IN (:id)", new MapSqlParameterSource("id", ids), vypisRawRowMapper);
+		return jdbc.query("SELECT id, vypis, banka_id FROM uploadovane_vypisy WHERE id IN (:id)", new MapSqlParameterSource("id", ids), vypisRawRowMapper);
 	}
 
 	public void zapsatVypis(UploadovanyVypis vypis) {

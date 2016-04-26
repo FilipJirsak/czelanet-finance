@@ -54,10 +54,10 @@ public class VypisyService {
 	private void zpracovatVypisy(List<VypisRaw> vypisy) throws IOException, DocumentException {
 		for (VypisRaw vypis : vypisy) {
 			switch (vypis.getBanka()) {
-				case "FIO":
+				case FIO:
 					zpracujVypisFIO(vypis);
 					break;
-				case "Raiffeisenbank a.s.":
+				case RAIFFEISENBANK:
 					zpracujVypisRB(vypis);
 					break;
 				default:

@@ -57,6 +57,7 @@ public class ParsovaneVypisyRepository {
 	}
 
 	public void zpracovatPlatby() {
-		urcitTypyPlatebProcedure.execute();
+		jdbc.update("CALL urcit_typy_plateb()", (SqlParameterSource) null);
+//		urcitTypyPlatebProcedure.execute();
 	}
 }

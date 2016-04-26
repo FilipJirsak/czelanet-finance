@@ -6,7 +6,7 @@ package net.czela.bank.dto;
 public class VypisRaw {
 	private int id;
 	private String vypis;
-	private String banka;
+	private Banka banka;
 
 	public int getId() {
 		return id;
@@ -24,11 +24,19 @@ public class VypisRaw {
 		this.vypis = vypis;
 	}
 
-	public String getBanka() {
+	public int getBankaId() {
+		return banka.getId();
+	}
+
+	public void setBankaId(int bankaId) {
+		this.banka =  Banka.values()[bankaId-1];
+	}
+
+	public Banka getBanka() {
 		return banka;
 	}
 
-	public void setBanka(String banka) {
+	public void setBanka(Banka banka) {
 		this.banka = banka;
 	}
 }
