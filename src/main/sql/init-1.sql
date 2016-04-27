@@ -395,6 +395,14 @@ CREATE PROCEDURE urcit_typy_plateb()
 |
 DELIMITER ;
 
+GRANT EXECUTE ON PROCEDURE netadmin.kontrola_vypisu  TO 'accounting'@'localhost';
+GRANT EXECUTE ON PROCEDURE netadmin.kontrola_vypisu  TO 'accounting'@'10.93.%';
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typ_platby  TO 'accounting'@'localhost';
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typ_platby  TO 'accounting'@'10.93.%';
+GRANT EXECUTE ON PROCEDURE netadmin.zapsat_do_deniku  TO 'accounting'@'localhost';
+GRANT EXECUTE ON PROCEDURE netadmin.zapsat_do_deniku  TO 'accounting'@'10.93.%';
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typy_plateb  TO 'accounting'@'localhost';
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typy_plateb  TO 'accounting'@'10.93.%';
 /*
 CALL urcit_typ_platby(57513, @typ_platby, @user_id);
 SELECT @typ_platby, pv.typ_platby, pv.typ_platby = @typ_platby, @user_id, pv.user_id, @user_id = pv.user_id FROM parsovane_vypisy pv WHERE id = 57513;
