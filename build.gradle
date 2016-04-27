@@ -43,6 +43,10 @@ repositories {
 }
 
 configurations {
+	compile {
+		exclude module: 'spring-boot-starter-tomcat'
+		exclude module: 'tomcat-juli'
+	}
 }
 
 dependencies {
