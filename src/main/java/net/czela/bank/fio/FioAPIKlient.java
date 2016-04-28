@@ -1,7 +1,7 @@
 package net.czela.bank.fio;
 
+import net.czela.bank.config.FioAPIConfiguration;
 import org.apache.http.HttpHost;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;

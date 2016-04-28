@@ -1,4 +1,4 @@
-package net.czela.bank.fio;
+package net.czela.bank.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
