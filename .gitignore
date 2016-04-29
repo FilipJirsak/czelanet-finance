@@ -8,3 +8,5 @@ classes
 .idea/libraries/*
 .idea/artifacts/*
 .idea/tasks.xml
+config/application.properties
+src/main/resources/config/application.properties
