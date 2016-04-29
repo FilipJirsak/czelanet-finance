@@ -39,8 +39,8 @@ public class VypisyService {
 	}
 
 	@Transactional
-	public void zpracovatVypisy(int ids) throws IOException, DocumentException {
-		List<VypisRaw> vypisy = nacistVypisy(ids);
+	public void zpracovatVypisy(int id) throws IOException, DocumentException {
+		List<VypisRaw> vypisy = nacistVypisy(id);
 		zpracovatVypisy(vypisy);
 	}
 

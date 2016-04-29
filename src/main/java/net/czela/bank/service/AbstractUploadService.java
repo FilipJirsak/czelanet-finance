@@ -5,6 +5,8 @@ import net.czela.bank.dto.UploadovanyVypis;
 import net.czela.bank.rb.RbTextVypisParser;
 import net.czela.bank.repository.UploadovaneVypisyRepository;
 import org.dom4j.DocumentException;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
@@ -22,6 +24,7 @@ public abstract class AbstractUploadService {
 		this.vypisyService = vypisyService;
 	}
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public void zapsatVypis(String vypis) throws IOException, DocumentException {
 		try (Parser parser = createParser(vypis)) {
 			boolean notEmpty = parser.read();
@@ -41,6 +44,7 @@ public abstract class AbstractUploadService {
 
 			uploadovaneVypisyRepository.zapsatVypis(uploadovanyVypis);
 
+			vypisyService.zpracovatVypisy();
 			vypisyService.zpracovatPlatby();
 		}
 	}
