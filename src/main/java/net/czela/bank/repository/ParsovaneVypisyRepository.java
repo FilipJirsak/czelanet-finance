@@ -40,8 +40,13 @@ public class ParsovaneVypisyRepository {
 			MapSqlParameterSource param = new MapSqlParameterSource();
 			param.addValue("idTransakce", transakce.getIdTransakce());
 			param.addValue("datum", transakce.getDatum());
-			param.addValue("nazevProtiuctu", transakce.getBankovniUcet().getNazev());
-			param.addValue("cisloProtiuctu", transakce.getBankovniUcet().getCeleCislo());
+			if (transakce.getBankovniUcet() != null) {
+				param.addValue("nazevProtiuctu", transakce.getBankovniUcet().getNazev());
+				param.addValue("cisloProtiuctu", transakce.getBankovniUcet().getCeleCislo());
+			} else {
+				param.addValue("nazevProtiuctu", null);
+				param.addValue("cisloProtiuctu", null);
+			}
 			param.addValue("vs", transakce.getVariabilniSymbol());
 			param.addValue("ks", transakce.getKonstantniSymbol());
 			param.addValue("ss", transakce.getSpecifickySymbol());
