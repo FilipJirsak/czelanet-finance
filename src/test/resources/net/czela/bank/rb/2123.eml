@@ -1,0 +1,112 @@
+From info@rb.cz  Mon May  2 01:52:39 2016
+Return-Path: <info@rb.cz>
+Received: from localhost (localhost [127.0.0.1])
+	by postak.czela.net (Postfix) with ESMTP id A4258133F13;
+	Mon,  2 May 2016 01:52:39 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at czela.net
+Received: from postak.czela.net ([127.0.0.1])
+	by localhost (postak.czela.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 11NVQey3Marw; Mon,  2 May 2016 01:52:36 +0200 (CEST)
+Received: from smtp1.rb.cz (smtp1.rb.cz [82.99.162.232])
+	by postak.czela.net (Postfix) with ESMTP id 81575133EEE
+	for <ebanka@czela.net>; Mon,  2 May 2016 01:52:36 +0200 (CEST)
+Received: from minotaur-3 (unknown [172.21.1.57])
+	by smtp1.rb.cz (Postfix) with ESMTP id EDC931821D9
+	for <ebanka@czela.net>; Mon,  2 May 2016 01:49:44 +0200 (CEST)
+Message-Id: <151122723.2--5--2016-1-49-44.RTMail@ebanka.cz>
+MIME-Version: 1.0
+From: "info@rb.cz" <info@rb.cz>
+Subject: Distribuce bankovniho vypisu
+To: ebanka@czela.net
+Content-Type: multipart/mixed; boundary="------=_EXPBANKA_8cc6f99f0145705e"
+Date: Mon, 2 May 2016 01:49:44 +0200
+X-Mailer: eBanka eMail Robot
+In-Reply-To: <151122723.2--5--2016-1-49-44.RTMail@ebanka.cz>
+
+This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--------=_EXPBANKA_8cc6f99f0145705e
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 8bit
+Content-description: Mail message body
+
+Bankovni vypis je prilolen do teto zpravy jako textovy soubor.
+
+--------=_EXPBANKA_8cc6f99f0145705e
+Content-Type: TEXT/PLAIN; charset="windows-1250"; name="16078_1222733001_CZK.TXT"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: Attachment; filename="16078_1222733001_CZK.TXT"
+
+
+
+Raiffeisenbank a.s. 
+Bankovni vypis c. 78
+Za obdobi 29.04.2016/30.04.2016
+
+Nazev uctu: czela.net
+Cislo uctu: 1222733001/5500
+IBAN:       CZ1855000000001222733001
+Mena:       CZK
+
+
+
+
+
+
+
+======================================================================================
+                                              Od pocatku roku         Za obdobi vypisu
+======================================================================================
+Pocatecni zustatek                                                           41 780.01
+Prijmy                                             221 504.52                     0.24
+Vydaje                                            -274 345.48                  -500.05
+Z toho poplatky                                                                -500.00
+Konecny zustatek                                                             41 280.20
+Z toho blokovano                                                                  0.00
+Pohledavky po splatnosti                                                          0.00
+Disponibilni zustatek                                                        41 280.20
+======================================================================================
+Zprava pro klienta
+Vklad na tomto uctu podleha ochrane, kterou poskytuje system pojisteni pohledavek 
+z vkladu. Podrobnejsi prehled o systemu pojisteni pohledavek z vkladu je k dispozici 
+na webovych strankach banky na adrese www.rb.cz.
+
+
+Pohyby na beznem uctu
+======================================================================================
+P.C. Datum Poznamka              Odeps.     SS                        Castka  Poplatek
+     Cas   Nazev uctu            Valuta     VS                                   Smena
+           Cislo uctu                       KS         Typ transakce            Zprava
+======================================================================================
+   1 30.04.Sprava uctu 122273300130.04.                                        -500.00
+     23:59                                                                            
+                                            898        Sprava uctu                    
+--------------------------------------------------------------------------------------
+   2 30.04.Urok 04/2016          30.04.                                 0.24          
+     23:59 czela.net                                                                  
+           1222733001/5500                  598        Kladny urok                    
+--------------------------------------------------------------------------------------
+   3 30.04.Srazkova dan          30.04.                                -0.05          
+     23:59 Srazkova dan z BU PO                                                       
+           8347092/5500                     1148       Srazka dane z uroku            
+--------------------------------------------------------------------------------------
+
+
+Poplatky za produkty a sluzby poskytovane v ramci cenoveho programu eKonto
+Datum|Poskytovane produkty a sluzby                                    |      Castka
+
+30.04|Vedeni bezneho uctu v hlavni mene za 04/2016                     |      500.00
+     |Generovani bankovnich vypisu                                     |        0.00
+     |Prime bankovnictvi                                               |        0.00
+     |Pristup kuctu prostrednictvim Mobilniho Elektronickeho Klice (ME|        0.00
+     |eKomunikator                                                     |        0.00
+--------------------------------------------------------------------------------------
+     |                                                           Celkem|      500.00
+
+
+
+
+--------=_EXPBANKA_8cc6f99f0145705e--
+
+

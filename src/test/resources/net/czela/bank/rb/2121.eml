@@ -1,0 +1,92 @@
+From info@rb.cz  Thu Apr 28 02:32:22 2016
+Return-Path: <info@rb.cz>
+Received: from localhost (localhost [127.0.0.1])
+	by postak.czela.net (Postfix) with ESMTP id 03D8E133BCA;
+	Thu, 28 Apr 2016 02:32:22 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at czela.net
+Received: from postak.czela.net ([127.0.0.1])
+	by localhost (postak.czela.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id uAl6jUeo8DOU; Thu, 28 Apr 2016 02:32:19 +0200 (CEST)
+Received: from smtp1.rb.cz (smtp1.rb.cz [82.99.162.232])
+	by postak.czela.net (Postfix) with ESMTP id 662A0132FB9
+	for <ebanka@czela.net>; Thu, 28 Apr 2016 02:32:19 +0200 (CEST)
+Received: from minotaur-3 (unknown [172.21.1.57])
+	by smtp1.rb.cz (Postfix) with ESMTP id 93BA3180901
+	for <ebanka@czela.net>; Thu, 28 Apr 2016 02:29:35 +0200 (CEST)
+Message-Id: <150969681.28--4--2016-2-29-35.RTMail@ebanka.cz>
+MIME-Version: 1.0
+From: "info@rb.cz" <info@rb.cz>
+Subject: Distribuce bankovniho vypisu
+To: ebanka@czela.net
+Content-Type: multipart/mixed; boundary="------=_EXPBANKA_c4f0c1df17e3e4d3"
+Date: Thu, 28 Apr 2016 02:29:35 +0200
+X-Mailer: eBanka eMail Robot
+In-Reply-To: <150969681.28--4--2016-2-29-35.RTMail@ebanka.cz>
+
+This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--------=_EXPBANKA_c4f0c1df17e3e4d3
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 8bit
+Content-description: Mail message body
+
+Bankovni vypis je prilolen do teto zpravy jako textovy soubor.
+
+--------=_EXPBANKA_c4f0c1df17e3e4d3
+Content-Type: TEXT/PLAIN; charset="windows-1250"; name="16076_1222733001_CZK.TXT"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: Attachment; filename="16076_1222733001_CZK.TXT"
+
+
+
+Raiffeisenbank a.s. 
+Bankovni vypis c. 76
+za 27.04.2016
+
+Nazev uctu: czela.net
+Cislo uctu: 1222733001/5500
+IBAN:       CZ1855000000001222733001
+Mena:       CZK
+
+
+
+
+
+
+
+======================================================================================
+                                              Od pocatku roku         Za obdobi vypisu
+======================================================================================
+Pocatecni zustatek                                                           40 380.01
+Prijmy                                             221 154.28                 1 050.00
+Vydaje                                            -273 845.43                     0.00
+Z toho poplatky                                                                   0.00
+Konecny zustatek                                                             41 430.01
+Z toho blokovano                                                                  0.00
+Pohledavky po splatnosti                                                          0.00
+Disponibilni zustatek                                                        41 430.01
+======================================================================================
+Zprava pro klienta
+Vklad na tomto uctu podleha ochrane, kterou poskytuje system pojisteni pohledavek 
+z vkladu. Podrobnejsi prehled o systemu pojisteni pohledavek z vkladu je k dispozici 
+na webovych strankach banky na adrese www.rb.cz.
+
+
+Pohyby na beznem uctu
+======================================================================================
+P.C. Datum Poznamka              Odeps.     SS                        Castka  Poplatek
+     Cas   Nazev uctu            Valuta     VS                                   Smena
+           Cislo uctu                       KS         Typ transakce            Zprava
+======================================================================================
+   1 27.04.129049                27.04.                             1 050.00          
+     02:17 Honza Hanak                      7015                                      
+           185111234/0300                   225        Prichozi platba                
+--------------------------------------------------------------------------------------
+
+
+
+
+--------=_EXPBANKA_c4f0c1df17e3e4d3--
+
+

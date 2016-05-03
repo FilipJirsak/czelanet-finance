@@ -75,37 +75,42 @@ public class RbTextVypisParser implements Closeable, Parser {
 
 	@Override
 	public boolean read() throws IOException {
-		while (nextLine()) {
-			switch (stav) {
-				case VYPIS:
-					parseVypis();
-					break;
-				case UCET:
-					parseUcet();
-					break;
-				case HLAVICKA_SOUHRNU:
-					logger.debug("Hlavička souhrnu: {}", line);
-					nextLine();
-					doubleSeparator();
-					stav = Stav.SOUHRN;
-					break;
-				case SOUHRN:
-					parseSouhrn();
-					break;
-				case ZPRAVA:
-					parseZprava();
-					break;
-				case HLAVICKA:
-					parseHlavicka();
-					break;
-				case POHYBY:
-					parsePohyby();
-					break;
-				case PATICKA:
-					break;
+		try {
+			while (nextLine()) {
+				switch (stav) {
+					case VYPIS:
+						parseVypis();
+						break;
+					case UCET:
+						parseUcet();
+						break;
+					case HLAVICKA_SOUHRNU:
+						logger.debug("Hlavička souhrnu: {}", line);
+						nextLine();
+						doubleSeparator();
+						stav = Stav.SOUHRN;
+						break;
+					case SOUHRN:
+						parseSouhrn();
+						break;
+					case ZPRAVA:
+						parseZprava();
+						break;
+					case HLAVICKA:
+						parseHlavicka();
+						break;
+					case POHYBY:
+						parsePohyby();
+						break;
+					case PATICKA:
+						break;
+				}
 			}
+			return true;
+		} catch (RuntimeException | IOException e) {
+			logger.error("Chyba při parsování výpisu na řádku {}.", reader.getLineNumber(), e);
+			throw e;
 		}
-		return true;
 	}
 
 	private boolean nextLine() throws IOException {
@@ -117,10 +122,14 @@ public class RbTextVypisParser implements Closeable, Parser {
 	}
 
 	private void parseVypis() {
-		if (reader.getLineNumber() == 1) {
-			logger.debug("Banka: {}", line);
-			bankovniUcet.setNazevBanky(line.trim());
-		} else if (matches(RE_VYPIS_C)) {
+		if (bankovniUcet.getNazevBanky() == null) {
+			if (StringUtil.isNotBlank(line)) {
+				logger.debug("Banka: {}", line);
+				bankovniUcet.setNazevBanky(line.trim());
+			}
+			return;
+		}
+		if (matches(RE_VYPIS_C)) {
 			cisloVypisu = matcher.group(1);
 		} else if (matches(RE_VYPIS_DATUM)) {
 			obdobiVypisuOd = LocalDate.parse(matcher.group(1), DATUM_VYPISU_FORMATTER);
@@ -237,13 +246,23 @@ public class RbTextVypisParser implements Closeable, Parser {
 
 	private void parsePohybyRadek2() {
 		transakce.setDatumCas(LocalDateTime.of(transakce.getDatum(), LocalTime.parse(substring(5, 11), CAS_POHYBU_FORMATTER)));
-		transakce.getBankovniUcet().setNazev(substring(11, 33));
+		String nazevUctu = substring(11, 33);
+		if (nazevUctu != null) {
+			transakce.setBankovniUcet(new BankovniUcet());
+			transakce.getBankovniUcet().setNazev(nazevUctu);
+		}
 		transakce.setVariabilniSymbol(substring(44, 54));
 		transakce.setPoplatekSmena(parseCastka(substring(77, 86)));
 	}
 
 	private void parsePohybyRadek3() {
-		transakce.getBankovniUcet().setCeleCislo(substring(11, 33));
+		String cisloUctu = substring(11, 33);
+		if (cisloUctu != null) {
+			if (transakce.getBankovniUcet() == null) {
+				transakce.setBankovniUcet(new BankovniUcet());
+			}
+			transakce.getBankovniUcet().setCeleCislo(cisloUctu);
+		}
 		transakce.setKonstantniSymbol(substring(44, 54));
 		transakce.setTyp(substring(55, 76));
 		transakce.setPoplatekZprava(parseCastka(substring(77, 86)));

@@ -1,0 +1,96 @@
+From info@rb.cz  Wed Apr 27 02:31:29 2016
+Return-Path: <info@rb.cz>
+Received: from localhost (localhost [127.0.0.1])
+	by postak.czela.net (Postfix) with ESMTP id 03F47133A71;
+	Wed, 27 Apr 2016 02:31:29 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at czela.net
+Received: from postak.czela.net ([127.0.0.1])
+	by localhost (postak.czela.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id C33xc9zm8R+h; Wed, 27 Apr 2016 02:31:26 +0200 (CEST)
+Received: from smtp1.rb.cz (smtp1.rb.cz [82.99.162.232])
+	by postak.czela.net (Postfix) with ESMTP id 1DFF5132193
+	for <ebanka@czela.net>; Wed, 27 Apr 2016 02:31:26 +0200 (CEST)
+Received: from minotaur-3 (unknown [172.21.1.57])
+	by smtp1.rb.cz (Postfix) with ESMTP id 676581801BD
+	for <ebanka@czela.net>; Wed, 27 Apr 2016 02:28:44 +0200 (CEST)
+Message-Id: <150911956.27--4--2016-2-28-44.RTMail@ebanka.cz>
+MIME-Version: 1.0
+From: "info@rb.cz" <info@rb.cz>
+Subject: Distribuce bankovniho vypisu
+To: ebanka@czela.net
+Content-Type: multipart/mixed; boundary="------=_EXPBANKA_22e84283f71b08ec"
+Date: Wed, 27 Apr 2016 02:28:44 +0200
+X-Mailer: eBanka eMail Robot
+In-Reply-To: <150911956.27--4--2016-2-28-44.RTMail@ebanka.cz>
+
+This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--------=_EXPBANKA_22e84283f71b08ec
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 8bit
+Content-description: Mail message body
+
+Bankovni vypis je prilolen do teto zpravy jako textovy soubor.
+
+--------=_EXPBANKA_22e84283f71b08ec
+Content-Type: TEXT/PLAIN; charset="windows-1250"; name="16075_1222733001_CZK.TXT"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: Attachment; filename="16075_1222733001_CZK.TXT"
+
+
+
+Raiffeisenbank a.s. 
+Bankovni vypis c. 75
+za 26.04.2016
+
+Nazev uctu: czela.net
+Cislo uctu: 1222733001/5500
+IBAN:       CZ1855000000001222733001
+Mena:       CZK
+
+
+
+
+
+
+
+======================================================================================
+                                              Od pocatku roku         Za obdobi vypisu
+======================================================================================
+Pocatecni zustatek                                                           38 980.01
+Prijmy                                             220 104.28                 1 400.00
+Vydaje                                            -273 845.43                     0.00
+Z toho poplatky                                                                   0.00
+Konecny zustatek                                                             40 380.01
+Z toho blokovano                                                                  0.00
+Pohledavky po splatnosti                                                          0.00
+Disponibilni zustatek                                                        40 380.01
+======================================================================================
+Zprava pro klienta
+Vklad na tomto uctu podleha ochrane, kterou poskytuje system pojisteni pohledavek 
+z vkladu. Podrobnejsi prehled o systemu pojisteni pohledavek z vkladu je k dispozici 
+na webovych strankach banky na adrese www.rb.cz.
+
+
+Pohyby na beznem uctu
+======================================================================================
+P.C. Datum Poznamka              Odeps.     SS                        Castka  Poplatek
+     Cas   Nazev uctu            Valuta     VS                                   Smena
+           Cislo uctu                       KS         Typ transakce            Zprava
+======================================================================================
+   1 26.04.                      26.04.                             1 050.00          
+     03:28 Lucie Novakova                   6835                                      
+           213641234/0800                   308        Prichozi platba                
+--------------------------------------------------------------------------------------
+   2 26.04.                      26.04.                               350.00          
+     03:29 Riha Jiri                        7029                                      
+           193580123/0100                   308        Prichozi platba                
+--------------------------------------------------------------------------------------
+
+
+
+
+--------=_EXPBANKA_22e84283f71b08ec--
+
+

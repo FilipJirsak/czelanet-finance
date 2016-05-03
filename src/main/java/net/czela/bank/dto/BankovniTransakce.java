@@ -31,7 +31,7 @@ public class BankovniTransakce {
 	@NotNull
 	private String mena;
 
-	private BankovniUcet bankovniUcet =  new BankovniUcet();
+	private BankovniUcet bankovniUcet;
 
 	private String uzivatelskaIdentifikace;
 
@@ -206,8 +206,10 @@ public class BankovniTransakce {
 		sb.append(idTransakce);
 		sb.append(' ');
 		sb.append(datum);
-		sb.append(' ');
-		bankovniUcet.getCeleCislo(sb);
+		if (bankovniUcet != null) {
+			sb.append(' ');
+			bankovniUcet.getCeleCislo(sb);
+		}
 		sb.append(' ');
 		sb.append(castka);
 		sb.append(' ');
@@ -223,6 +225,11 @@ public class BankovniTransakce {
 		if (specifickySymbol != null) {
 			sb.append(" SS: ");
 			sb.append(specifickySymbol);
+		}
+		if (komentar != null) {
+			sb.append(" (");
+			sb.append(komentar);
+			sb.append(")");
 		}
 		return sb.toString();
 	}

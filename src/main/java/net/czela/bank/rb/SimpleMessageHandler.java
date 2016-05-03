@@ -1,22 +1,18 @@
 package net.czela.bank.rb;
 
-import jodd.io.StreamUtil;
 import net.czela.bank.service.RbUploadService;
 import org.dom4j.DocumentException;
-import org.hibernate.validator.constraints.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.subethamail.smtp.MessageContext;
 import org.subethamail.smtp.MessageHandler;
 import org.subethamail.smtp.RejectException;
-import org.subethamail.smtp.TooMuchDataException;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayInputStream;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 
 public class SimpleMessageHandler implements MessageHandler {
 	private final Logger logger = LoggerFactory.getLogger(SimpleMessageHandler.class);
@@ -28,6 +24,10 @@ public class SimpleMessageHandler implements MessageHandler {
 
 	@Override
 	public void from(String from) throws RejectException {
+		if (!from.contains("info@rb.cz")) {
+			logger.error("E-mail od {} byl odmítnut.", from);
+			throw new RejectException();
+		}
 	}
 
 	@Override
@@ -35,14 +35,20 @@ public class SimpleMessageHandler implements MessageHandler {
 	}
 
 	@Override
-	public void data(InputStream data) throws RejectException, TooMuchDataException, IOException {
+	public void data(InputStream data) throws RejectException, IOException {
 		try {
-			MimeMessage message = new MimeMessage(null, data);
-			logger.debug("Přijat e-mail: {}", message);
-			rbUploadService.zapsatVypis((String) message.getContent());
+			String vypis = parseMessage(data);
+			rbUploadService.zapsatVypis(vypis);
 		} catch (MessagingException | DocumentException e) {
 			throw new IOException(e);
 		}
+	}
+
+	protected String parseMessage(InputStream data) throws MessagingException, IOException {
+		MimeMessage message = new MimeMessage(null, data);
+		logger.debug("Přijat e-mail: {}", message);
+		MimeMultipart multipart = (MimeMultipart) message.getContent();
+		return (String) multipart.getBodyPart(1).getContent();
 	}
 
 	@Override

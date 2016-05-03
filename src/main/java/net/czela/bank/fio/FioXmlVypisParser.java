@@ -65,6 +65,7 @@ public class FioXmlVypisParser implements Parser, Closeable {
 			transakce.setDatum(LocalDate.parse(getValue(transactionElement, "Datum"), DATUM_VYPISU_FORMATTER));
 			transakce.setCastka(new BigDecimal(getValue(transactionElement, "Objem")));
 			transakce.setMena(getValue(transactionElement, "Měna"));
+			transakce.setBankovniUcet(new BankovniUcet());
 			transakce.getBankovniUcet().setPredcisliCislo(getValue(transactionElement, "Protiúčet"));
 			transakce.getBankovniUcet().setNazev(getValue(transactionElement, "Název protiúčtu"));
 			transakce.getBankovniUcet().setKodBanky(getValue(transactionElement, "Kód banky"));

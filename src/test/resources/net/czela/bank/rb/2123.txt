@@ -1,0 +1,68 @@
+
+
+Raiffeisenbank a.s. 
+Bankovni vypis c. 78
+Za obdobi 29.04.2016/30.04.2016
+
+Nazev uctu: czela.net
+Cislo uctu: 1222733001/5500
+IBAN:       CZ1855000000001222733001
+Mena:       CZK
+
+
+
+
+
+
+
+======================================================================================
+                                              Od pocatku roku         Za obdobi vypisu
+======================================================================================
+Pocatecni zustatek                                                           41 780.01
+Prijmy                                             221 504.52                     0.24
+Vydaje                                            -274 345.48                  -500.05
+Z toho poplatky                                                                -500.00
+Konecny zustatek                                                             41 280.20
+Z toho blokovano                                                                  0.00
+Pohledavky po splatnosti                                                          0.00
+Disponibilni zustatek                                                        41 280.20
+======================================================================================
+Zprava pro klienta
+Vklad na tomto uctu podleha ochrane, kterou poskytuje system pojisteni pohledavek 
+z vkladu. Podrobnejsi prehled o systemu pojisteni pohledavek z vkladu je k dispozici 
+na webovych strankach banky na adrese www.rb.cz.
+
+
+Pohyby na beznem uctu
+======================================================================================
+P.C. Datum Poznamka              Odeps.     SS                        Castka  Poplatek
+     Cas   Nazev uctu            Valuta     VS                                   Smena
+           Cislo uctu                       KS         Typ transakce            Zprava
+======================================================================================
+   1 30.04.Sprava uctu 122273300130.04.                                        -500.00
+     23:59                                                                            
+                                            898        Sprava uctu                    
+--------------------------------------------------------------------------------------
+   2 30.04.Urok 04/2016          30.04.                                 0.24          
+     23:59 czela.net                                                                  
+           1222733001/5500                  598        Kladny urok                    
+--------------------------------------------------------------------------------------
+   3 30.04.Srazkova dan          30.04.                                -0.05          
+     23:59 Srazkova dan z BU PO                                                       
+           8347092/5500                     1148       Srazka dane z uroku            
+--------------------------------------------------------------------------------------
+
+
+Poplatky za produkty a sluzby poskytovane v ramci cenoveho programu eKonto
+Datum|Poskytovane produkty a sluzby                                    |      Castka
+
+30.04|Vedeni bezneho uctu v hlavni mene za 04/2016                     |      500.00
+     |Generovani bankovnich vypisu                                     |        0.00
+     |Prime bankovnictvi                                               |        0.00
+     |Pristup kuctu prostrednictvim Mobilniho Elektronickeho Klice (ME|        0.00
+     |eKomunikator                                                     |        0.00
+--------------------------------------------------------------------------------------
+     |                                                           Celkem|      500.00
+
+
+
