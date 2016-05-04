@@ -25,9 +25,9 @@ import java.util.regex.Pattern;
  */
 public class RbTextVypisParser implements Closeable, Parser {
 
-	private static final Pattern RE_VYPIS_C = Pattern.compile("Bankovni vypis c. (\\d+)");
+	private static final Pattern RE_VYPIS_C = Pattern.compile("Bankovní výpis č. (\\d+)");
 	private static final Pattern RE_VYPIS_DATUM = Pattern.compile("za (\\d{2}\\.\\d{2}\\.\\d{4})");
-	private static final Pattern RE_VYPIS_OBDOBI = Pattern.compile("Za obdobi (\\d{2}\\.\\d{2}\\.\\d{4})/(\\d{2}\\.\\d{2}\\.\\d{4})");
+	private static final Pattern RE_VYPIS_OBDOBI = Pattern.compile("Za období (\\d{2}\\.\\d{2}\\.\\d{4})/(\\d{2}\\.\\d{2}\\.\\d{4})");
 
 	private static final int LINE_LENGTH = 86;
 	private static final String SINGLE_SEPARATOR = StringUtil.repeat('-', LINE_LENGTH);
@@ -155,18 +155,18 @@ public class RbTextVypisParser implements Closeable, Parser {
 		String nazev = substring(0, 11);
 		String hodnota = substring(12);
 		switch (nazev) {
-			case "Nazev uctu:":
+			case "Název účtu:":
 				logger.debug("Název účtu: {}", hodnota);
 				bankovniUcet.setNazev(hodnota);
 				break;
-			case "Cislo uctu:":
+			case "Číslo účtu:":
 				logger.debug("Číslo účtu: {}", hodnota);
 				bankovniUcet.setCeleCislo(hodnota);
 				break;
 			case "IBAN:":
 				logger.debug("IBAN: {}", hodnota);
 				break;
-			case "Mena:":
+			case "Měna:":
 				logger.debug("Měna: {}", hodnota);
 				break;
 		}
@@ -182,17 +182,17 @@ public class RbTextVypisParser implements Closeable, Parser {
 		String hodnota2 = substring(72);
 		logger.debug("Souhrn: {} | {} | {}", nazev, hodnota1, hodnota2);
 		switch (nazev) {
-			case "Pocatecni zustatek":
+			case "Počáteční zůstatek":
 				pocatecniZustatek = parseCastka(hodnota2);
 				break;
-			case "Konecny zustatek":
+			case "Konečný zůstatek":
 				konecnyZustatek = parseCastka(hodnota2);
 				break;
 		}
 	}
 
 	private void parseZprava() throws IOException {
-		if (line.trim().equals("Pohyby na beznem uctu")) {
+		if (line.trim().equals("Pohyby na běžném účtu")) {
 			zprava = zpravaBuilder.toString();
 			nextLine();
 			doubleSeparator();
