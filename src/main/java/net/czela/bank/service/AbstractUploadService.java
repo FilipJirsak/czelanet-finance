@@ -2,9 +2,11 @@ package net.czela.bank.service;
 
 import net.czela.bank.dto.Banka;
 import net.czela.bank.dto.UploadovanyVypis;
-import net.czela.bank.rb.RbTextVypisParser;
 import net.czela.bank.repository.UploadovaneVypisyRepository;
 import org.dom4j.DocumentException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,9 @@ import java.io.IOException;
  * Created by jirsakf on 26.4.2016.
  */
 public abstract class AbstractUploadService {
+
+	private final Logger logger = LoggerFactory.getLogger(AbstractUploadService.class);
+
 	private final Banka banka;
 	private final UploadovaneVypisyRepository uploadovaneVypisyRepository;
 	private final VypisyService vypisyService;
@@ -24,7 +29,7 @@ public abstract class AbstractUploadService {
 		this.vypisyService = vypisyService;
 	}
 
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	@Transactional
 	public void zapsatVypis(String vypis) throws IOException, DocumentException {
 		try (Parser parser = createParser(vypis)) {
 			boolean notEmpty = parser.read();
@@ -43,9 +48,17 @@ public abstract class AbstractUploadService {
 			uploadovanyVypis.setKonecnyZustatek(parser.getKonecnyZustatek());
 
 			uploadovaneVypisyRepository.zapsatVypis(uploadovanyVypis);
+			zpracovatVypisyyAPlatby();
+		}
+	}
 
+	@Async
+	protected void zpracovatVypisyyAPlatby() {
+		try {
 			vypisyService.zpracovatVypisy();
 			vypisyService.zpracovatPlatby();
+		} catch (IOException | DocumentException ex) {
+			logger.error("Chyba při zpracování výpisů.", ex);
 		}
 	}
 
