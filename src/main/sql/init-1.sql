@@ -44,6 +44,7 @@ ALTER TABLE typ_platby
 	COMMENT 'Číslo účtu czela.net, ke kterému se typ platby vztahuje';
 
 DELIMITER |
+
 CREATE PROCEDURE kontrola_vypisu(pbanka_id TINYINT UNSIGNED, pdatum_od DATE, pdatum_do DATE)
 READS SQL DATA
 	COMMENT 'Zkontroluje návaznost bankovních výpisů v zadaném období.'
@@ -90,6 +91,9 @@ READS SQL DATA
 		CLOSE cur;
 	END;
 |
+
+GRANT EXECUTE ON PROCEDURE netadmin.kontrola_vypisu TO 'accounting'@'localhost'|
+GRANT EXECUTE ON PROCEDURE netadmin.kontrola_vypisu TO 'accounting'@'10.93.%'|
 
 CREATE PROCEDURE urcit_typ_platby(IN p_id INT UNSIGNED, OUT p_typ_platby INT UNSIGNED, OUT p_user_id SMALLINT UNSIGNED)
 	BEGIN
@@ -234,6 +238,9 @@ CREATE PROCEDURE urcit_typ_platby(IN p_id INT UNSIGNED, OUT p_typ_platby INT UNS
 	END;
 |
 
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typ_platby TO 'accounting'@'localhost'|
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typ_platby TO 'accounting'@'10.93.%'|
+
 CREATE PROCEDURE zapsat_do_deniku(IN p_id INT UNSIGNED)
 	BEGIN
 		DECLARE v_datum DATE;
@@ -361,6 +368,9 @@ CREATE PROCEDURE zapsat_do_deniku(IN p_id INT UNSIGNED)
 	END;
 |
 
+GRANT EXECUTE ON PROCEDURE netadmin.zapsat_do_deniku TO 'accounting'@'localhost'|
+GRANT EXECUTE ON PROCEDURE netadmin.zapsat_do_deniku TO 'accounting'@'10.93.%'|
+
 CREATE PROCEDURE urcit_typy_plateb()
 	BEGIN
 		DECLARE done INT DEFAULT FALSE;
@@ -394,18 +404,16 @@ CREATE PROCEDURE urcit_typy_plateb()
 				CALL zapsat_do_deniku(v_id);
 			END IF;
 		END LOOP;
+
+		DROP TEMPORARY TABLE neparsovane_vypisy;
 	END;
 |
+
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typy_plateb TO 'accounting'@'localhost'|
+GRANT EXECUTE ON PROCEDURE netadmin.urcit_typy_plateb TO 'accounting'@'10.93.%'|
+
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE netadmin.kontrola_vypisu TO 'accounting'@'localhost';
-GRANT EXECUTE ON PROCEDURE netadmin.kontrola_vypisu TO 'accounting'@'10.93.%';
-GRANT EXECUTE ON PROCEDURE netadmin.urcit_typ_platby TO 'accounting'@'localhost';
-GRANT EXECUTE ON PROCEDURE netadmin.urcit_typ_platby TO 'accounting'@'10.93.%';
-GRANT EXECUTE ON PROCEDURE netadmin.zapsat_do_deniku TO 'accounting'@'localhost';
-GRANT EXECUTE ON PROCEDURE netadmin.zapsat_do_deniku TO 'accounting'@'10.93.%';
-GRANT EXECUTE ON PROCEDURE netadmin.urcit_typy_plateb TO 'accounting'@'localhost';
-GRANT EXECUTE ON PROCEDURE netadmin.urcit_typy_plateb TO 'accounting'@'10.93.%';
 /*
 CALL urcit_typ_platby(57513, @typ_platby, @user_id);
 SELECT @typ_platby, pv.typ_platby, pv.typ_platby = @typ_platby, @user_id, pv.user_id, @user_id = pv.user_id FROM parsovane_vypisy pv WHERE id = 57513;
