@@ -38,14 +38,14 @@ public class VypisyService {
 		zpracovatVypisy(vypisy);
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public void zpracovatVypisy(int id) throws IOException, DocumentException {
 		List<VypisRaw> vypisy = nacistVypisy(id);
 		zpracovatVypisy(vypisy);
 	}
 
 	@Async
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void zpracovatPlatby() {
 		parsovaneVypisyRepository.zpracovatPlatby();
 	}

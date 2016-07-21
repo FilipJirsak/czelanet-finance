@@ -29,7 +29,7 @@ public abstract class AbstractUploadService {
 		this.vypisyService = vypisyService;
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public void zapsatVypis(String vypis) throws IOException, DocumentException {
 		try (Parser parser = createParser(vypis)) {
 			boolean notEmpty = parser.read();
@@ -47,12 +47,16 @@ public abstract class AbstractUploadService {
 			uploadovanyVypis.setPocatecniZustatek(parser.getPocatecniZustatek());
 			uploadovanyVypis.setKonecnyZustatek(parser.getKonecnyZustatek());
 
+			logger.debug("Rozparsován výpis {} z {}", parser.getCisloVypisu(), parser.getBankovniUcet().getNazev());
 			uploadovaneVypisyRepository.zapsatVypis(uploadovanyVypis);
+			logger.debug("Uložen výpis {} z {}", parser.getCisloVypisu(), parser.getBankovniUcet().getNazev());
+
 			zpracovatVypisyyAPlatby();
 		}
 	}
 
 	@Async
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	protected void zpracovatVypisyyAPlatby() {
 		try {
 			vypisyService.zpracovatVypisy();
