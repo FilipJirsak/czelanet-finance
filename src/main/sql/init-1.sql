@@ -63,7 +63,7 @@ READS SQL DATA
 			                       koncovy_zustatek
 		                       FROM uploadovane_vypisy uv
 		                       WHERE uv.banka_id = pbanka_id AND uv.obdobi_od >= pdatum_od AND uv.obdobi_do <= pdatum_do
-		                       ORDER BY uv.obdobi_od, uv.cislo_vypisu;
+		                       ORDER BY uv.obdobi_od, CAST(uv.cislo_vypisu AS UNSIGNED );
 		DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
 		OPEN cur;
