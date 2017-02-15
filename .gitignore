@@ -9,4 +9,3 @@ classes
 .idea/artifacts/*
 .idea/tasks.xml
 config/*
-src/main/resources/config/application.properties

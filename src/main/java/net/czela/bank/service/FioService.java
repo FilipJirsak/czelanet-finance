@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,6 +42,10 @@ public class FioService extends AbstractUploadService {
 		zapsatVypis(vypis);
 	}
 
+	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	public String nacistPohyby(LocalDate datumOd, LocalDate datumDo) throws IOException, DocumentException {
+		return fioAPIKlient.nacistPohybyZaObdobi(datumOd, datumDo, FioAPIFormatTransakci.XML);
+	}
 
 	@Override
 	protected Parser createParser(String vypis) throws IOException, DocumentException {

@@ -1,10 +1,8 @@
 package net.czela.bank;
 
-import net.czela.bank.repository.UploadovaneVypisyRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 

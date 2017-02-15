@@ -2,7 +2,6 @@ package net.czela.bank.service;
 
 import net.czela.bank.dto.VypisRaw;
 import net.czela.bank.fio.FioXmlVypisParser;
-import net.czela.bank.rb.RbTextVypisParser;
 import net.czela.bank.repository.ParsovaneVypisyRepository;
 import net.czela.bank.repository.UploadovaneVypisyRepository;
 import org.dom4j.DocumentException;
@@ -13,8 +12,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.StringReader;
 import java.util.List;
 
 /**
@@ -57,9 +54,6 @@ public class VypisyService {
 				case FIO:
 					zpracujVypisFIO(vypis);
 					break;
-				case RAIFFEISENBANK:
-					zpracujVypisRB(vypis);
-					break;
 				default:
 					throw new RuntimeException(String.format("Neznámý typ banky: %s", vypis.getBanka()));
 			}
@@ -74,15 +68,6 @@ public class VypisyService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
 	private List<VypisRaw> nacistVypisy(int ids) {
 		return uploadovaneVypisyRepository.nacistVypisy(ids);
-	}
-
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	private void zpracujVypisRB(VypisRaw vypis) throws IOException {
-		try (RbTextVypisParser parser = new RbTextVypisParser(vypis.getVypis())) {
-			parser.read();
-			parsovaneVypisyRepository.zapsatTransakce(parser.getTransakce(), vypis.getId());
-			uploadovaneVypisyRepository.vypisZpracovan(vypis.getId());
-		}
 	}
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
