@@ -1,7 +1,6 @@
 package net.czela.bank.service;
 
 import net.czela.bank.dto.Banka;
-import net.czela.bank.dto.UploadovanyVypis;
 import net.czela.bank.fio.FioAPIFormatTransakci;
 import net.czela.bank.fio.FioAPIKlient;
 import net.czela.bank.fio.FioXmlVypisParser;
@@ -17,38 +16,47 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by jirsakf on 26.4.2016.
  */
 @Service
 public class FioService extends AbstractUploadService {
-	private final Logger logger = LoggerFactory.getLogger(FioService.class);
+  private final Logger logger = LoggerFactory.getLogger(FioService.class);
 
-	private final FioAPIKlient fioAPIKlient;
+  private final FioAPIKlient fioAPIKlient;
 
-	@Autowired
-	public FioService(FioAPIKlient fioAPIKlient, UploadovaneVypisyRepository uploadovaneVypisyRepository, VypisyService vypisyService) {
-		super(Banka.FIO, uploadovaneVypisyRepository, vypisyService);
-		this.fioAPIKlient = fioAPIKlient;
-	}
+  @Autowired
+  public FioService(FioAPIKlient fioAPIKlient, UploadovaneVypisyRepository uploadovaneVypisyRepository, VypisyService vypisyService) {
+    super(Banka.FIO, uploadovaneVypisyRepository, vypisyService);
+    this.fioAPIKlient = fioAPIKlient;
+  }
 
-	@Scheduled(fixedDelay = 3_600_000L) //1× za hodinu
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
-	public void nacistNovePlatby() throws IOException, DocumentException {
-		String vypis = fioAPIKlient.nacistPohybyOdMinule(FioAPIFormatTransakci.XML);
-		logger.debug("Načten výpis z Fio banky.");
-		zapsatVypis(vypis);
-	}
+  @Scheduled(cron = "0 15 * * * *")
+  public void nacistNovePlatbyScheduled() throws IOException, DocumentException {
+    nacistNovePlatby();
+  }
 
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
-	public String nacistPohyby(LocalDate datumOd, LocalDate datumDo) throws IOException, DocumentException {
-		return fioAPIKlient.nacistPohybyZaObdobi(datumOd, datumDo, FioAPIFormatTransakci.XML);
-	}
+  @Transactional(propagation = Propagation.NOT_SUPPORTED)
+  public String nacistNovePlatby() throws IOException, DocumentException {
+    String vypis = fioAPIKlient.nacistPohybyOdMinule(FioAPIFormatTransakci.XML);
+    logger.debug("Načten výpis z Fio banky:\n{}", vypis);
+    zapsatVypis(vypis);
+    return vypis;
+  }
 
-	@Override
-	protected Parser createParser(String vypis) throws IOException, DocumentException {
-		return new FioXmlVypisParser(vypis);
-	}
+  @Transactional(propagation = Propagation.NOT_SUPPORTED)
+  public String nacistPohyby(LocalDate datumOd, LocalDate datumDo) throws IOException, DocumentException {
+    return fioAPIKlient.nacistPohybyZaObdobi(datumOd, datumDo, FioAPIFormatTransakci.XML);
+  }
+
+  @Transactional(propagation = Propagation.NOT_SUPPORTED)
+  public void nastavitZarazku(long zarazka) throws IOException, DocumentException {
+    fioAPIKlient.nastavitZarazku(zarazka);
+  }
+
+  @Override
+  protected Parser createParser(String vypis) throws IOException, DocumentException {
+    return new FioXmlVypisParser(vypis);
+  }
 }

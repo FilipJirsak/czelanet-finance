@@ -1,8 +1,9 @@
 package net.czela.bank.controller;
 
 import net.czela.bank.service.FioService;
-import net.czela.bank.service.VypisyService;
 import org.dom4j.DocumentException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,23 +19,39 @@ import java.time.LocalDate;
 /**
  * Created by jirsakf on 26.4.2016.
  */
-@Controller(value = "/fio")
+@Controller
+@RequestMapping("/fio")
 public class FioController {
+  private final Logger logger = LoggerFactory.getLogger(FioController.class);
 
-	private final FioService fioService;
+  private final FioService fioService;
 
-	@Autowired
-	public FioController(FioService fioService) {
-		this.fioService = fioService;
-	}
+  @Autowired
+  public FioController(FioService fioService) {
+    this.fioService = fioService;
+  }
 
-	@RequestMapping("/vypis")
-	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseEntity<String> vypis(@RequestParam("od") String datumOd, @RequestParam("do") String datumDo) throws IOException, DocumentException {
-		String response = fioService.nacistPohyby(LocalDate.parse(datumOd), LocalDate.parse(datumDo));
-		return ResponseEntity
-				.ok()
-				.contentType(MediaType.APPLICATION_XML)
-				.body(response);
-	}
+  @RequestMapping("/vypis")
+  public ResponseEntity<String> vypis(@RequestParam("od") String datumOd, @RequestParam("do") String datumDo) throws IOException, DocumentException {
+    String response = fioService.nacistPohyby(LocalDate.parse(datumOd), LocalDate.parse(datumDo));
+    return ResponseEntity
+        .ok()
+        .contentType(MediaType.APPLICATION_XML)
+        .body(response);
+  }
+
+  @RequestMapping("/nove")
+  public ResponseEntity<String> nove() throws IOException, DocumentException {
+    String response = fioService.nacistNovePlatby();
+    return ResponseEntity
+        .ok()
+        .contentType(MediaType.APPLICATION_XML)
+        .body(response);
+  }
+
+  @RequestMapping("/nastavit-zarazku")
+  @ResponseStatus(code = HttpStatus.ACCEPTED)
+  public void nastavitZarazku(@RequestParam("zarazka") long zarazka) throws IOException, DocumentException {
+    fioService.nastavitZarazku(zarazka);
+  }
 }

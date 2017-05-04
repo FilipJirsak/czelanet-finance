@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Bankovní výpisy</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+  <h1>Bankovní výpisy</h1>
+
+  <h2>Stáhnout nové</h2>
+  <form class="form-inline" action="/fio/nove">
+    <button type="submit" class="btn btn-default">Stáhnout</button>
+  </form>
+
+  <h2>Zobrazit období</h2>
+  <form class="form-inline" action="/fio/vypis">
+    <div class="form-group">
+      <label for="obdobi-od">Od</label>
+      <input type="date" class="form-control" id="obdobi-od" name="od" />
+    </div>
+    <div class="form-group">
+      <label for="obdobi-do">Do</label>
+      <input type="date" class="form-control" id="obdobi-do" name="do" />
+    </div>
+    <button type="submit" class="btn btn-default">Zobrazit</button>
+  </form>
+
+  <div class="alert alert-danger" role="alert">Pozor, níže uvedené akce spouštějte pouze v případě, že opravdu víte, co děláte!</div>
+
+  <h2>Parsovat výpis</h2>
+  <form class="form-inline" action="/parse">
+    <div class="form-group">
+      <label for="id-vypisu">ID výpisu</label>
+      <input type="number" class="form-control" id="id-vypisu" name="id" />
+    </div>
+    <button type="submit" class="btn btn-danger">Parsovat</button>
+  </form>
+
+  <h2>Nastavit zarážku</h2>
+  <form class="form-inline" action="/fio/nastavit-zarazku">
+    <div class="form-group">
+      <label for="zarazka">ID poslední transakce</label>
+      <input type="number" class="form-control" id="zarazka" placeholder="123456789" name="zarazka">
+    </div>
+    <button type="submit" class="btn btn-danger">Nastavit</button>
+  </form>
+</div>
+</body>
+</html>

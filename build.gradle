@@ -1,72 +1,68 @@
 buildscript {
-    repositories {
-        maven {
-            url "https://maven.eveoh.nl/content/repositories/releases"
-        }
+  repositories {
+    maven {
+      url "https://maven.eveoh.nl/content/repositories/releases"
     }
+  }
 
-    dependencies {
-        classpath "nl.eveoh:gradle-aspectj:1.6"
-    }
+  dependencies {
+    classpath "nl.eveoh:gradle-aspectj:1.6"
+  }
 }
 
 ext {
-    aspectjVersion = '1.8.4'
-    libs = [
-            springBoot: '1.5.1.RELEASE',
-            spring    : '4.3.6.RELEASE'
-    ]
+  aspectjVersion = '1.8.4'
+  libs = [
+      springBoot: '1.5.3.RELEASE',
+      spring    : '4.3.8.RELEASE'
+  ]
 }
 
 
 apply plugin: 'java'
-apply plugin: 'war'
+apply plugin: 'java-library-distribution'
 apply plugin: 'aspectj'
 
-war {
-    baseName = 'banka'
-    version = '4.1.0-SNAPSHOT'
-}
+version= '4.2.0'
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+  options.encoding = 'UTF-8'
 }
 
 compileAspect {
-    additionalAjcArgs = ['encoding': 'UTF-8']
+  additionalAjcArgs = ['encoding': 'UTF-8']
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
+  mavenLocal()
+  mavenCentral()
 }
 
 configurations {
-    compile {
-        exclude module: 'spring-boot-starter-tomcat'
-        exclude module: 'tomcat-juli'
-    }
+  compile {
+    exclude module: 'spring-boot-starter-tomcat'
+  }
 }
 
 dependencies {
-    compile(
-            "org.springframework.boot:spring-boot-starter-web:${libs.springBoot}",
-            "org.springframework.boot:spring-boot-starter-jdbc:${libs.springBoot}",
-            "org.springframework.boot:spring-boot-starter-aop:${libs.springBoot}",
-            "org.springframework.boot:spring-boot-starter-web:${libs.springBoot}",
-            "org.springframework.boot:spring-boot-starter-actuator:${libs.springBoot}",
-            "org.springframework:spring-aspects:${libs.spring}",
+  compile(
+      "org.springframework.boot:spring-boot-starter-web:${libs.springBoot}",
+      "org.springframework.boot:spring-boot-starter-jdbc:${libs.springBoot}",
+      "org.springframework.boot:spring-boot-starter-aop:${libs.springBoot}",
+      "org.springframework.boot:spring-boot-starter-web:${libs.springBoot}",
+      "org.springframework.boot:spring-boot-starter-actuator:${libs.springBoot}",
+      "org.springframework:spring-aspects:${libs.spring}",
 
-            'org.jodd:jodd-core:3.8.1',
+      'org.jodd:jodd-core:3.8.1',
 
-            'org.dom4j:dom4j:2.0.0',
+      'org.dom4j:dom4j:2.0.0',
 
-            'org.apache.httpcomponents:httpclient:4.5.2',
-
-//			'org.subethamail:subethasmtp:3.1.7',
-    )
+      'org.apache.httpcomponents:httpclient:4.5.2',
+  )
 
 /*
 	optional(
@@ -75,23 +71,32 @@ dependencies {
 */
 
 //	providedRuntime(
-    compile(
-            "org.springframework.boot:spring-boot-starter-jetty:${libs.springBoot}",
-    )
-    runtime(
-            "mysql:mysql-connector-java:6.0.5"
-    )
+  compile(
+      "org.springframework.boot:spring-boot-starter-jetty:${libs.springBoot}",
+  )
+  runtime(
+      "mysql:mysql-connector-java:6.0.5"
+  )
 
-    testCompile(
-            "org.springframework.boot:spring-boot-starter-test:${libs.springBoot}",
-            'org.testng:testng:6.9.10',
-    )
+  testCompile(
+      "org.springframework.boot:spring-boot-starter-test:${libs.springBoot}",
+      'org.testng:testng:6.9.10',
+  )
 
-    aspectpath(
-            "org.springframework:spring-aspects:${libs.spring}"
+  aspectpath(
+      "org.springframework:spring-aspects:${libs.spring}"
+  )
+}
+
+jar {
+  manifest {
+    attributes(
+        'Main-Class': 'net.czela.bank.Main',
+        'Class-Path': configurations.runtime.collect { "lib/${it.name}" }.join(' ')
     )
+  }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
+  gradleVersion = '3.5'
 }

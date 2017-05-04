@@ -5,6 +5,8 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ import java.util.function.Consumer;
  */
 @Component
 public class FioAPIKlient implements Closeable {
+	private final Logger logger = LoggerFactory.getLogger(FioAPIKlient.class);
+
 	private final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE;
 	private final CloseableHttpClient httpClient;
 	private final StringResponseHandler stringResponseHandler = new StringResponseHandler();
@@ -93,7 +97,9 @@ public class FioAPIKlient implements Closeable {
 		} else {
 			builder.append('/');
 		}
-		return new HttpGet(builder.toString());
+		String uri = builder.toString();
+		logger.debug("GET {}", uri);
+		return new HttpGet(uri);
 	}
 
 	@PreDestroy
